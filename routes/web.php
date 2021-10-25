@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\BoardsController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+
+Route::get('/user/{id}', [UserController::class, 'show']);
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +18,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect('/dashboard');
+    return redirect('/board');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+// Route::middleware(['auth:sanctum', 'verified'])->get('/board', function () {
+
+
+//     return view('dashboard');
+// })->name('dashboard');
+
+Route::resource('board', BoardsController::class)->middleware(['auth:sanctum', 'verified']);

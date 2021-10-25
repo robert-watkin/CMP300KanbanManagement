@@ -1,4 +1,4 @@
-<div class="flex flex-col justify-between bg-white p-5 h-full" style="width:200px;">
+<div class="flex flex-col justify-between bg-white p-5 h-full" style="width: 15rem;">
     <div class="flex flex-col gap-4">
         <div class="flex flex-row items-center justify-center h-20 shadow-md">
             <!-- Notifications -->
@@ -28,7 +28,7 @@
 
             <!-- Logo -->
             <div class=" items-center">
-                <a href="{{ route('dashboard') }}">
+                <a href="{{ route('board.index') }}">
                     <x-jet-application-mark class="block h-9 w-auto" />
                 </a>
             </div>
@@ -93,12 +93,16 @@
                 <h1>Boards</h1>
                 <ul class="mb-4">
                     <!-- TOOD Display dynamically -->
+                    @if ($boardList)
+                    @foreach($boardList as $board)
                     <li>
-                        <a href="{{ route('dashboard') }}" class="flex flex-row items-center h-2 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                        <a href="{{ route('board.index') }}" class="flex flex-row items-center h-2 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
                             <span class="inline-flex items-center justify-center h-4 text-lg text-gray-400"><i class="bx bx-home"></i></span>
-                            <span class="text-sm font-medium">Dashboard</span>
+                            <span class="text-sm font-medium">{{ $board->title }}</span>
                         </a>
                     </li>
+                    @endforeach
+                    @endif
                 </ul>
             </div>
 
@@ -120,14 +124,14 @@
             <ul class="mb-4">
                 <!-- TOOD Display dynamically -->
                 <li>
-                    <a href="{{ route('dashboard') }}" class="flex flex-row items-center h-2 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                    <a href="{{ route('board.index') }}" class="flex flex-row items-center h-2 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
                         <span class="inline-flex items-center justify-center h-4 text-lg text-gray-400"><i class="bx bx-home"></i></span>
                         <span class="text-sm font-medium">User Management</span>
                     </a>
                 </li>
                 <!-- TOOD Display dynamically -->
                 <li>
-                    <a href="{{ route('dashboard') }}" class="flex flex-row items-center h-2 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                    <a href="{{ route('board.index') }}" class="flex flex-row items-center h-2 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
                         <span class="inline-flex items-center justify-center h-4 text-lg text-gray-400"><i class="bx bx-home"></i></span>
                         <span class="text-sm font-medium">Board Management</span>
                     </a>
