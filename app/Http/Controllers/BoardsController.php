@@ -14,7 +14,7 @@ class BoardsController extends Controller
      */
     public function index()
     {
-        //
+        // display base page telling user to select or create a board
         return view('board-selection');
     }
 
@@ -48,6 +48,7 @@ class BoardsController extends Controller
     public function show(Board $board)
     {
         //
+        return view('board')->with(compact('board'));
     }
 
     /**
