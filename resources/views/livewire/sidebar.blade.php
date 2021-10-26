@@ -1,4 +1,4 @@
-<div class="flex flex-col justify-between bg-white p-5 h-full" style="width: 15rem;">
+<div class="flex flex-col justify-between bg-white w-full h-full">
     <div class="flex flex-col gap-4">
         <div class="flex flex-row items-center justify-center h-20 shadow-md">
             <!-- Notifications -->
@@ -91,12 +91,12 @@
 
             <div class="mt-2">
                 <h1>Boards</h1>
-                <ul class="mb-4">
+                <ul class="mb-4 mt-2">
                     <!-- TOOD Display dynamically -->
                     @if ($boardList)
                     @foreach($boardList as $board)
-                    <li>
-                        <a href="{{ route('board.index') }}" class="flex flex-row items-center h-2 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                    <li class="my-2">
+                        <a href="{{ route('board.index', ['board' => $board->id]) }}" class="flex flex-row items-center h-2 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
                             <span class="inline-flex items-center justify-center h-4 text-lg text-gray-400"><i class="bx bx-home"></i></span>
                             <span class="text-sm font-medium">{{ $board->title }}</span>
                         </a>
@@ -106,8 +106,8 @@
                 </ul>
             </div>
 
-            <div class="px-1">
-                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 h-1 px-4 border-2 border-r-2 mx-2 w-full rounded inline-flex items-center">
+            <div class="">
+                <button class="bg-gray-100 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 border-2 border-r-2 w-full rounded inline-flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                     </svg>
@@ -118,18 +118,17 @@
     </div>
 
     <div class="hidden sm:flex sm:items-center sm:ml-6">
-        <!-- TODO admin links -->
+        <!-- admin links -->
         <div>
+            @if ($user->role == "admin")
             <h1 class="">Admin</h1>
             <ul class="mb-4">
-                <!-- TOOD Display dynamically -->
-                <li>
+                <li class="mb-4 mt-1">
                     <a href="{{ route('board.index') }}" class="flex flex-row items-center h-2 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
                         <span class="inline-flex items-center justify-center h-4 text-lg text-gray-400"><i class="bx bx-home"></i></span>
                         <span class="text-sm font-medium">User Management</span>
                     </a>
                 </li>
-                <!-- TOOD Display dynamically -->
                 <li>
                     <a href="{{ route('board.index') }}" class="flex flex-row items-center h-2 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
                         <span class="inline-flex items-center justify-center h-4 text-lg text-gray-400"><i class="bx bx-home"></i></span>
@@ -137,6 +136,7 @@
                     </a>
                 </li>
             </ul>
+            @endif
         </div>
     </div>
 </div>

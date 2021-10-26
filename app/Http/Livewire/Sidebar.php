@@ -10,14 +10,22 @@ class Sidebar extends Component
 {
     public function render()
     {
-        $boardLinks = Auth::user()->boards();
+        // get the logged in user
+        $user = Auth::user();
+
+        // get boards
+        $boardLinks = $user->boards()->get();
         $boardList = array();
-        dd($boardList);
         foreach ($boardLinks as $boardLink) {
-            $board = $boardLink->board();
+            $boards = $boardLink->board()->get();
+            $board = $boards[0];
             array_push($boardList, $board);
         }
 
-        return view('livewire.sidebar')->with(compact('boardList'));
+        // TODO notifications
+
+
+
+        return view('livewire.sidebar')->with(compact('boardList', 'user'));
     }
 }
