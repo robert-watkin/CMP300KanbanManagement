@@ -106,7 +106,7 @@
                 </ul>
             </div>
 
-            <div class="">
+            <div>
                 <button class="bg-gray-100 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 border-2 border-r-2 w-full rounded inline-flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />

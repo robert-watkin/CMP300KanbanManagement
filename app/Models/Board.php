@@ -13,4 +13,9 @@ class Board extends Model
     {
         return $this->hasMany(BoardMember::class);
     }
+
+    public function buckets()
+    {
+        return $this->hasMany(Bucket::class);
+    }
 }
