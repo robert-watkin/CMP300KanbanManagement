@@ -13,4 +13,9 @@ class Card extends Model
     {
         return $this->belongsTo(Bucket::class);
     }
+
+    public function cardMembers()
+    {
+        return $this->hasMany(CardMember::class);
+    }
 }

@@ -26,6 +26,7 @@ class BoardsController extends Controller
     public function create()
     {
         //
+        return view('board.create');
     }
 
     /**
@@ -48,7 +49,7 @@ class BoardsController extends Controller
     public function show(Board $board)
     {
         //
-        return view('board')->with(compact('board'));
+        return view('board.index')->with(compact('board'));
     }
 
     /**

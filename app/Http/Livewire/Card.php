@@ -9,6 +9,14 @@ class Card extends Component
     public $card;
     public function render()
     {
-        return view('livewire.card', $this->card);
+
+        $links = $this->card->cardMembers()->get();
+        $users = array();
+        foreach ($links as $link) {
+            $user = $link->user()->get();
+            array_push($users, $user[0]);
+        }
+
+        return view('livewire.card', ['card' => $this->card, 'assigned' => $users]);
     }
 }
