@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Board;
+use App\Models\BoardMember;
 use Illuminate\Http\Request;
 
 class BoardsController extends Controller
@@ -25,7 +26,7 @@ class BoardsController extends Controller
      */
     public function create()
     {
-        //
+        // return view to create board
         return view('board.create');
     }
 
@@ -37,7 +38,34 @@ class BoardsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => [
+                'required'
+            ]
+        ]);
+
+        $title = $request->input('title');
+        $members = json_decode($request->input('members'));
+
+        $test = array($title, $members);
+
+        // create and save board to db
+        $board = new Board;
+        $board->title = $title;
+        $board->save();
+
+
+        // create and save each board member
+        foreach ($members as $member) {
+            $boardmember = new BoardMember();
+            $boardmember->board_id = $board->id;
+            $boardmember->user_id = $member[4];
+            $boardmember->status = $member[1];
+            $boardmember->role = $member[2];
+            $boardmember->save();
+        }
+
+        return redirect('/');
     }
 
     /**
