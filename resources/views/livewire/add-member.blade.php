@@ -1,4 +1,4 @@
-<div>
+<div class="mt-4 mb-6">
     <!-- Members -->
     @isset($error)
     <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
@@ -13,7 +13,7 @@
         <!-- Add Members -->
         <div class="flex flex-col pt-4 pb-1">
             <div class="relative">
-                <x-jet-dropdown align="right" style="bottom:100%;" width="60">
+                <x-jet-dropdown align="bottom" style="bottom:100%;" width="60">
                     <x-slot name="trigger">
                         <a class="bg-gray-100 hover:bg-gray-400 text-gray-800 py-1 pl-2 pr-3 border-2 border-r-2 rounded-full inline-flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -27,15 +27,25 @@
                         <div class="m-2">
                             @csrf
 
-                            <div class="flex flex-col mb-2">
-                                <x-jet-label for="email" class="flex-none ml-2 mx-4 my-2 text-sm" value="{{ __('Email') }}" />
+                            <div class="flex flex-col mb-1">
+                                <x-jet-label for="email" class="flex-none ml-2 mx-4  text-sm" value="{{ __('Email') }}" />
                                 <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model="email" />
+                            </div>
+
+
+                            <div class="block text-left" style="max-width: 400px">
+                                <x-jet-label for="email" class="flex-none ml-2 mx-4  text-sm" value="{{ __('Role') }}" />
+                                <select name="role" wire:model="role" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-full mt-1 mb-2">
+                                    @foreach($roleOptions as $role)
+                                    <option value="{{ $role }}">{{ $role }}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
 
 
                             <x-jet-button type="button" wire:click="addMember" class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full" wire:loading.attr="disabled ">
-                                {{ __('Add') }}
+                                {{ __('Invite') }}
                             </x-jet-button>
 
                             <div wire:loading wire:target="addMember">

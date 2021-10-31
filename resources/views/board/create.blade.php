@@ -2,7 +2,7 @@
     <x-slot name="slot">
         <div class="flex flex-col h-full p-2">
 
-            <div class="max-w-4xl w-full bg-white rounded-lg overflow-hidden shadow-lg mx-auto my-auto p-2">
+            <div class="max-w-4xl w-full bg-white rounded-lg  shadow-lg mx-auto my-auto p-2">
                 <form action="{{ route('board.store') }}" method="post">
                     <h1 class="text-lg">New Board</h1>
 
