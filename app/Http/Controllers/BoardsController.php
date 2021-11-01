@@ -88,7 +88,9 @@ class BoardsController extends Controller
      */
     public function edit(Board $board)
     {
-        //
+        $board = Board::find($board)->first();
+
+        return view('board.edit')->with(compact('board'));
     }
 
     /**
@@ -111,6 +113,9 @@ class BoardsController extends Controller
      */
     public function destroy(Board $board)
     {
-        //
+        $board = Board::find($board)->first();
+        $board->delete();
+
+        return redirect()->route('board.index');
     }
 }

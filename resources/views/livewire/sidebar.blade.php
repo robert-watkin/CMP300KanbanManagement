@@ -91,14 +91,14 @@
 
             <div class="mt-2">
                 <h1>Boards</h1>
-                <ul class="mb-4 mt-2">
+                <ul class="mb-4 mt-2 overflow-x-hidden overflow-y-auto max-h-80">
                     <!-- TOOD Display dynamically -->
                     @if ($boardList)
                     @foreach($boardList as $board)
-                    <li class="my-4">
-                        <a href="{{ route('board.show', ['board' => $board->id]) }}" class="flex flex-row items-center h-2 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
-                            <span class="inline-flex items-center justify-center h-4 text-lg text-gray-400"><i class="bx bx-home"></i></span>
-                            <span class="text-sm font-medium">{{ $board->title }}</span>
+                    <hr />
+                    <li class="my-2">
+                        <a href="{{ route('board.show', ['board' => $board->id]) }}" class="flex flex-row items-center transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                            <p class="text-sm font-medium">{{ $board->title }}</p>
                         </a>
                     </li>
                     @endforeach

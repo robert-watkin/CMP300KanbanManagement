@@ -25,7 +25,7 @@
 
     <div id="app">
         <div class="flex flex-row bg-gray-100 min-h-screen w-screen">
-            <div class="flex-none hidden sm:block bg-white w-48">
+            <div class="flex-none hidden sm:block bg-white w-56">
                 @livewire('sidebar')
             </div>
             <div class="flex-grow">
