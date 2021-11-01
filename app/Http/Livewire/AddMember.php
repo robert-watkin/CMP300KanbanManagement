@@ -93,4 +93,12 @@ class AddMember extends Component
 
         $this->render();
     }
+
+    public function removeMember($member)
+    {
+        // search for and remove the member from the array
+        if (($key = array_search($member, $this->members)) !== false) {
+            unset($this->members[$key]);
+        }
+    }
 }
