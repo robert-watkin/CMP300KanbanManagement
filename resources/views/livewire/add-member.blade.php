@@ -32,7 +32,6 @@
                                 <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model="email" />
                             </div>
 
-
                             <div class="block text-left" style="max-width: 400px">
                                 <x-jet-label for="email" class="flex-none ml-2 mx-4  text-sm" value="{{ __('Role') }}" />
                                 <select name="role" wire:model="role" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-full mt-1 mb-2">
@@ -41,8 +40,6 @@
                                     @endforeach
                                 </select>
                             </div>
-
-
 
                             <x-jet-button type="button" wire:click="addMember" class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full" wire:loading.attr="disabled ">
                                 {{ __('Invite') }}
@@ -75,7 +72,16 @@
             <tr class="bg-white h-12 border">
                 <td class="px-6 align-middle py-3 text-xs whitespace-nowrap font-semibold text-left">{{ $member[0] }}</td>
                 <td class="px-6 align-middle py-3 text-xs whitespace-nowrap font-semibold text-left">{{ $member[1] }}</td>
-                <td class="px-6 align-middle py-3 text-xs whitespace-nowrap font-semibold text-left">{{ $member[2] }}</td>
+                <td class="px-6 align-middle py-3 text-xs whitespace-nowrap font-semibold text-left">
+                    <select wire:model="roles.{{ $member[4] }}" wire:change="roleChange" name="role" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-36 mt-1 mb-2">
+                        @foreach($roleOptions as $role)
+                        <option value="{{ $role }}">{{ $role }}</option>
+                        @endforeach
+                    </select>
+                    <p wire:loading wire:target="roleChange" class="text-sm w-24">
+                        Loading ...
+                    </p>
+                </td>
                 <td class="flex flex-row justify-between py-3">
                     @if(!$first)
                     <button type="button" wire:click="removeMember({{ json_encode($member) }})" class="cursor-pointer mr-1" wire:loading.attr="disabled">
@@ -84,8 +90,8 @@
                         </svg>
                     </button>
 
-                    <p wire:loading wire:target="removeMember" class="text-sm w-24">
-                        Loading ...
+                    <p wire:loading wire:target="removeMember" class="text-sm">
+                        Updating ...
                     </p>
                     @endif
                 </td>

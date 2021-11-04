@@ -5,6 +5,7 @@
             <div class="max-w-4xl w-full bg-white rounded-lg  shadow-lg mx-auto my-auto p-2">
                 <form action="{{ route('board.store') }}" method="post">
                     <h1 class="text-lg">New Board</h1>
+                    {{ csrf_field() }}
 
                     <!-- Title -->
                     <div class="my-2">

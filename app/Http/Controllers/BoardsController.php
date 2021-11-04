@@ -103,6 +103,43 @@ class BoardsController extends Controller
     public function update(Request $request, Board $board)
     {
         //
+        $board = Board::find($board)->first();
+        $board->title = $request->input('title');
+        $board->save();
+
+        $members = json_decode($request->input('members'));
+
+        $boardmembers = BoardMember::where(['board_id' => $board->id])->get();
+
+
+
+        // edit and save each board member
+        foreach ($members as $member) {
+            $boardmember = null;
+            // if the member exists then edit. If the member doesn't exits then add them to the DB
+            $toedit = new BoardMember();
+            foreach ($boardmembers as $boardmember) {
+                if ($boardmember->user_id == $member[4]) {
+                    $toedit = $boardmember;
+                }
+            }
+
+
+            if (!$toedit->exists()) {
+                $toedit->board_id = $board->id;
+                $toedit->user_id = $member[4];
+                $toedit->status = $member[1];
+                $toedit->role = $member[2];
+                $toedit->save();
+            } else {
+                $toedit->role = $member[2];
+                $toedit->save();
+            }
+        }
+
+
+
+        return redirect()->route('board.show', $board->id);
     }
 
     /**

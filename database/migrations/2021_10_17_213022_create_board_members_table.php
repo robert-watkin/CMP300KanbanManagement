@@ -14,7 +14,7 @@ class CreateBoardMembersTable extends Migration
     public function up()
     {
         Schema::create('board_members', function (Blueprint $table) {
-            $table->primary(['user_id', 'board_id']);
+            $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('board_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
