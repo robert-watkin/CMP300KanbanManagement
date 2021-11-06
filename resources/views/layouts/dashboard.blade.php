@@ -24,11 +24,11 @@
     <x-jet-banner />
 
     <div id="app">
-        <div class="flex flex-row bg-gray-100 min-h-screen w-screen">
+        <div class="flex flex-row bg-gray-100 min-h-screen max-w-full">
             <div class="flex-none hidden sm:block bg-white w-56">
                 @livewire('sidebar')
             </div>
-            <div class="flex-grow">
+            <div class="flex-grow overflow-hidden">
                 {{ $slot }}
             </div>
         </div>

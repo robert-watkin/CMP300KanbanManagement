@@ -10,6 +10,14 @@ module.exports = {
     ],
 
     theme: {
+        minWidth:{
+            '12': '3rem',
+            '16': '4rem',
+            '20': '5rem',
+            '24': '6rem',
+            '28': '7rem',
+            '48': '12rem'
+        },
         extend: {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],

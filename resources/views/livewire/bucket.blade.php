@@ -1,5 +1,4 @@
-<div class="flex-1 flex-col space-y-2 text-left">
-
+<div>
     <div class="flex text-xl justify-center my-2">
         {{ $bucket->title }}
         <svg xmlns="http://www.w3.org/2000/svg" class="ml-3 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -1,6 +1,6 @@
 <x-dashboard-layout>
     <x-slot name="slot">
-        <div class="flex justify-between overflow-hidden bg-white w-full h-14 shadow-sm">
+        <div class="flex justify-between overflow-hidden bg-white w-fill h-14 shadow-sm">
             <h1 class="text-2xl font-bold text-gray-900 tracking-tight ml-6 mt-3">{{ $board->title }}</h1>
             <a href="{{ route('board.edit', $board) }}">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mt-3 mr-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -10,13 +10,8 @@
             </a>
         </div>
 
-        <div class="flex flex-col md:flex-row justify-end space-x-2 h-5/6 m-2">
-            @foreach($board->buckets()->get() as $bucket)
-            <livewire:bucket :bucket="$bucket" />
-            @endforeach
-            <div class="flex-none min-w-24 float-right text-center mx-3">
-                <h1>New Bucket</h1>
-            </div>
+        <div class="h-full">
+            <livewire:bucket-panel :board="$board">
         </div>
     </x-slot>
 </x-dashboard-layout>

@@ -54,7 +54,6 @@ class BoardsController extends Controller
         $board->title = $title;
         $board->save();
 
-
         // create and save each board member
         foreach ($members as $member) {
             $boardmember = new BoardMember();
