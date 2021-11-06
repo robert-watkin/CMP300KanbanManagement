@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        <div class="px-6">
+        <div class="px-4 mx-2">
             <!-- Settings Dropdown -->
             <div class="flex flex-col">
                 <div class="relative">

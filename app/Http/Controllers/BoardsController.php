@@ -109,23 +109,14 @@ class BoardsController extends Controller
 
         $members = json_decode($request->input('members'));
 
-        $boardmembers = BoardMember::where(['board_id' => $board->id])->get();
-
-
 
         // edit and save each board member
         foreach ($members as $member) {
-            $boardmember = null;
             // if the member exists then edit. If the member doesn't exits then add them to the DB
-            $toedit = new BoardMember();
-            foreach ($boardmembers as $boardmember) {
-                if ($boardmember->user_id == $member[4]) {
-                    $toedit = $boardmember;
-                }
-            }
+            $toedit = BoardMember::where(['user_id' => $member[4], 'board_id' => $board->id])->first();
 
-
-            if (!$toedit->exists()) {
+            if ($toedit === null) {
+                $toedit = new BoardMember();
                 $toedit->board_id = $board->id;
                 $toedit->user_id = $member[4];
                 $toedit->status = $member[1];
@@ -137,7 +128,21 @@ class BoardsController extends Controller
             }
         }
 
+        $allMembers = BoardMember::where(['board_id' => $board->id])->get();
 
+        // check and delete members that no longer exist
+        foreach ($allMembers as $DBmember) {
+            $exists = false;
+            foreach ($members as $member) {
+                if ($DBmember->user_id == $member[4]) {
+                    $exists = true;
+                }
+            }
+
+            if (!$exists) {
+                $DBmember->delete();
+            }
+        }
 
         return redirect()->route('board.show', $board->id);
     }
