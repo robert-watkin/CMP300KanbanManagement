@@ -59,7 +59,7 @@ class AddMember extends Component
             // get info for the membes
             $user = Auth::user();
             $name = $user->first_name . " " . $user->last_name;
-            $status = "accepted";
+            $status = "Accepted";
             $role = "Admin";
 
             $member = array();

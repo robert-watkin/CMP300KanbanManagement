@@ -72,26 +72,30 @@
             <tr class="bg-white h-12 border">
                 <td class="px-6 align-middle py-3 text-xs whitespace-nowrap font-semibold text-left">{{ $member[0] }}</td>
                 <td class="px-6 align-middle py-3 text-xs whitespace-nowrap font-semibold text-left">{{ $member[1] }}</td>
-                <td class="px-6 align-middle py-3 text-xs whitespace-nowrap font-semibold text-left">
-                    <select wire:model="roles.{{ $member[4] }}" wire:change="roleChange" name="role" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-36 mt-1 mb-2">
+                <td class="px-6 align-middle text-xs whitespace-nowrap font-semibold text-left w-12">
+                    @if($first)
+                    {{ $member[2] }}
+                    @else
+                    <select wire:model="roles.{{ $member[4] }}" wire:change="roleChange" name="role" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md text-sm h-10 shadow-sm">
                         @foreach($roleOptions as $role)
                         <option value="{{ $role }}">{{ $role }}</option>
                         @endforeach
                     </select>
-                    <p wire:loading wire:target="roleChange" class="text-sm w-24">
-                        Loading ...
+                    <p wire:loading wire:target="roleChange" class="text-sm">
+                        ...
                     </p>
+                    @endif
                 </td>
                 <td class="flex flex-row justify-between py-3">
                     @if(!$first)
-                    <button type="button" wire:click="removeMember({{ json_encode($member) }})" class="cursor-pointer mr-1" wire:loading.attr="disabled">
+                    <button type="button" wire:click="removeMember({{ json_encode($member) }})" class="cursor-pointer mr-1 my-auto" wire:loading.attr="disabled">
                         <svg xmlns="http://www.w3.org/2000/svg" class="ml-3 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
 
                     <p wire:loading wire:target="removeMember" class="text-sm">
-                        Updating ...
+                        ...
                     </p>
                     @endif
                 </td>
