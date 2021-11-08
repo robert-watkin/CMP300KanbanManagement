@@ -8311,24 +8311,28 @@ select {
   width: max-content;
 }
 
-.min-w-0 {
-  min-width: 0px;
+.min-w-12 {
+  min-width: 3rem;
 }
 
-.min-w-full {
-  min-width: 100%;
+.min-w-16 {
+  min-width: 4rem;
 }
 
-.min-w-min {
-  min-width: -webkit-min-content;
-  min-width: -moz-min-content;
-  min-width: min-content;
+.min-w-20 {
+  min-width: 5rem;
 }
 
-.min-w-max {
-  min-width: -webkit-max-content;
-  min-width: -moz-max-content;
-  min-width: max-content;
+.min-w-24 {
+  min-width: 6rem;
+}
+
+.min-w-28 {
+  min-width: 7rem;
+}
+
+.min-w-48 {
+  min-width: 12rem;
 }
 
 .max-w-0 {
@@ -40936,24 +40940,28 @@ select {
     width: max-content;
   }
 
-  .sm\:min-w-0 {
-    min-width: 0px;
+  .sm\:min-w-12 {
+    min-width: 3rem;
   }
 
-  .sm\:min-w-full {
-    min-width: 100%;
+  .sm\:min-w-16 {
+    min-width: 4rem;
   }
 
-  .sm\:min-w-min {
-    min-width: -webkit-min-content;
-    min-width: -moz-min-content;
-    min-width: min-content;
+  .sm\:min-w-20 {
+    min-width: 5rem;
   }
 
-  .sm\:min-w-max {
-    min-width: -webkit-max-content;
-    min-width: -moz-max-content;
-    min-width: max-content;
+  .sm\:min-w-24 {
+    min-width: 6rem;
+  }
+
+  .sm\:min-w-28 {
+    min-width: 7rem;
+  }
+
+  .sm\:min-w-48 {
+    min-width: 12rem;
   }
 
   .sm\:max-w-0 {
@@ -73483,24 +73491,28 @@ select {
     width: max-content;
   }
 
-  .md\:min-w-0 {
-    min-width: 0px;
+  .md\:min-w-12 {
+    min-width: 3rem;
   }
 
-  .md\:min-w-full {
-    min-width: 100%;
+  .md\:min-w-16 {
+    min-width: 4rem;
   }
 
-  .md\:min-w-min {
-    min-width: -webkit-min-content;
-    min-width: -moz-min-content;
-    min-width: min-content;
+  .md\:min-w-20 {
+    min-width: 5rem;
   }
 
-  .md\:min-w-max {
-    min-width: -webkit-max-content;
-    min-width: -moz-max-content;
-    min-width: max-content;
+  .md\:min-w-24 {
+    min-width: 6rem;
+  }
+
+  .md\:min-w-28 {
+    min-width: 7rem;
+  }
+
+  .md\:min-w-48 {
+    min-width: 12rem;
   }
 
   .md\:max-w-0 {
@@ -106030,24 +106042,28 @@ select {
     width: max-content;
   }
 
-  .lg\:min-w-0 {
-    min-width: 0px;
+  .lg\:min-w-12 {
+    min-width: 3rem;
   }
 
-  .lg\:min-w-full {
-    min-width: 100%;
+  .lg\:min-w-16 {
+    min-width: 4rem;
   }
 
-  .lg\:min-w-min {
-    min-width: -webkit-min-content;
-    min-width: -moz-min-content;
-    min-width: min-content;
+  .lg\:min-w-20 {
+    min-width: 5rem;
   }
 
-  .lg\:min-w-max {
-    min-width: -webkit-max-content;
-    min-width: -moz-max-content;
-    min-width: max-content;
+  .lg\:min-w-24 {
+    min-width: 6rem;
+  }
+
+  .lg\:min-w-28 {
+    min-width: 7rem;
+  }
+
+  .lg\:min-w-48 {
+    min-width: 12rem;
   }
 
   .lg\:max-w-0 {
@@ -138577,24 +138593,28 @@ select {
     width: max-content;
   }
 
-  .xl\:min-w-0 {
-    min-width: 0px;
+  .xl\:min-w-12 {
+    min-width: 3rem;
   }
 
-  .xl\:min-w-full {
-    min-width: 100%;
+  .xl\:min-w-16 {
+    min-width: 4rem;
   }
 
-  .xl\:min-w-min {
-    min-width: -webkit-min-content;
-    min-width: -moz-min-content;
-    min-width: min-content;
+  .xl\:min-w-20 {
+    min-width: 5rem;
   }
 
-  .xl\:min-w-max {
-    min-width: -webkit-max-content;
-    min-width: -moz-max-content;
-    min-width: max-content;
+  .xl\:min-w-24 {
+    min-width: 6rem;
+  }
+
+  .xl\:min-w-28 {
+    min-width: 7rem;
+  }
+
+  .xl\:min-w-48 {
+    min-width: 12rem;
   }
 
   .xl\:max-w-0 {
@@ -171124,24 +171144,28 @@ select {
     width: max-content;
   }
 
-  .\32xl\:min-w-0 {
-    min-width: 0px;
+  .\32xl\:min-w-12 {
+    min-width: 3rem;
   }
 
-  .\32xl\:min-w-full {
-    min-width: 100%;
+  .\32xl\:min-w-16 {
+    min-width: 4rem;
   }
 
-  .\32xl\:min-w-min {
-    min-width: -webkit-min-content;
-    min-width: -moz-min-content;
-    min-width: min-content;
+  .\32xl\:min-w-20 {
+    min-width: 5rem;
   }
 
-  .\32xl\:min-w-max {
-    min-width: -webkit-max-content;
-    min-width: -moz-max-content;
-    min-width: max-content;
+  .\32xl\:min-w-24 {
+    min-width: 6rem;
+  }
+
+  .\32xl\:min-w-28 {
+    min-width: 7rem;
+  }
+
+  .\32xl\:min-w-48 {
+    min-width: 12rem;
   }
 
   .\32xl\:max-w-0 {

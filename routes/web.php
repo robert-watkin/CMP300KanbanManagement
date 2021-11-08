@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\BoardsController;
+use App\Http\Controllers\CardsController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -28,3 +30,6 @@ Route::get('/', function () {
 // })->name('dashboard');
 
 Route::resource('board', BoardsController::class)->middleware(['auth:sanctum', 'verified']);
+Route::resource('card', CardsController::class, [
+    'only' => ['edit', 'update', 'destroy']
+])->middleware(['auth:sanctum', 'verified']);

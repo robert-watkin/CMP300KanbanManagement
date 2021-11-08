@@ -6,7 +6,7 @@
     <p class="text-sm">{{ $user->first_name }} {{ $user->last_name }}</p>
     @endforeach
 
-    <button class="bg-blue-500 hover:bg-blue-700 text-white  font-bold px-4 rounded-full float-right">
+    <a href="{{ route('card.edit', $card) }}" class="bg-blue-500 hover:bg-blue-700 text-white  font-bold px-4 rounded-full float-right">
         Open
-    </button>
+    </a>
 </div>

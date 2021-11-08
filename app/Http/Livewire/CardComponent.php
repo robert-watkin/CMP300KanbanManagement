@@ -4,7 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 
-class Card extends Component
+class CardComponent extends Component
 {
     public $card;
     public function render()
@@ -17,6 +17,6 @@ class Card extends Component
             array_push($users, $user[0]);
         }
 
-        return view('livewire.card', ['card' => $this->card, 'assigned' => $users]);
+        return view('livewire.card-component', ['card' => $this->card, 'assigned' => $users]);
     }
 }

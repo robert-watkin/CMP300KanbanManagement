@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Bucket;
+use App\Models\Card;
 
 class BucketComponent extends Component
 {
@@ -27,5 +28,14 @@ class BucketComponent extends Component
     {
         $this->bucket->title = $this->bucketTitle;
         $this->bucket->save();
+    }
+
+    public function newCard()
+    {
+        $card = new Card();
+        $card->title = "New Card";
+        $card->description = "";
+        $card->bucket_id = $this->bucket->id;
+        $card->save();
     }
 }
