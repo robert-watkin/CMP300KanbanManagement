@@ -8,6 +8,14 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <!-- Alpine JS -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Pikaday -->
+    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
+
+
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
@@ -25,12 +33,12 @@
 
     <div id="app">
         <div class="flex flex-row bg-gray-100 min-h-screen max-w-full">
-            <div class="flex-none hidden sm:block bg-white w-56">
+            <aside class="flex-none top-0 h-screen hidden sticky sm:block bg-white w-56">
                 @livewire('sidebar')
-            </div>
-            <div class="flex-grow overflow-hidden">
+            </aside>
+            <main class="flex-grow overflow-hidden">
                 {{ $slot }}
-            </div>
+            </main>
         </div>
     </div>
 

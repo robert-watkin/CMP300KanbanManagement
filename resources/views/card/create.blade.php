@@ -19,21 +19,22 @@
 
                         <!-- Description -->
                         <div class="my-2">
-                            <x-jet-label for="description" class="flex-none ml-2 mx-4 my-2 text-lg" value="{{ __('Description') }}" />
-                            <textarea rows="4" name="description" id="description" type="text" class="w-full overflow-y-hiden resize-none" wire:model.defer="description" autocomplete="title"></textarea>
-                            <x-jet-input-error for="title" class="mt-2 ml-16" />
+                            <x-jet-label for="description" class="flex-none ml-2 mx-4 text-lg" value="{{ __('Description') }}" />
+                            <textarea rows="3" name="description" id="description" type="text" class="w-full overflow-y-hiden resize-none border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" wire:model.defer="description" autocomplete="title"></textarea>
+                            <x-jet-input-error for="description" class="mt-2 ml-16" />
                         </div>
 
 
                         <!-- Checklist component? -->
+                        <div>
+                            <livewire:checklist />
+                        </div>
 
                         <!-- Deadline  -->
                         <div class="my-2">
-                            <div class="flex flex-row">
-                                <x-jet-label for="deadline" class="flex-none ml-2 mx-4 my-2 text-lg" value="{{ __('Deadline') }}" />
-                                <x-jet-input value="" id="datepicker" name="deadline" id="deadline" type="text" class="flex-grow" wire:model.defer="deadline" autocomplete="title" />
-                            </div>
-                            <x-jet-input-error for="title" class="mt-2 ml-16" />
+                            <x-jet-label for="deadline" class="flex-none ml-2 mx-4 text-lg" value="{{ __('Deadline') }}" />
+                            <x-date-picker wire:model="deadline" id="deadline" />
+                            <x-jet-input-error for="deadline" class="mt-2 ml-16" />
                         </div>
                     </div>
 
