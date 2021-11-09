@@ -30,6 +30,4 @@ Route::get('/', function () {
 // })->name('dashboard');
 
 Route::resource('board', BoardsController::class)->middleware(['auth:sanctum', 'verified']);
-Route::resource('card', CardsController::class, [
-    'only' => ['edit', 'update', 'destroy']
-])->middleware(['auth:sanctum', 'verified']);
+Route::resource('card', CardsController::class)->middleware(['auth:sanctum', 'verified']);

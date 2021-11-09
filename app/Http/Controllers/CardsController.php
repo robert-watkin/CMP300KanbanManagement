@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Card;
+use App\Models\Bucket;
 use Illuminate\Http\Request;
 
 class CardsController extends Controller
@@ -22,9 +23,12 @@ class CardsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Bucket $bucketid)
     {
         //
+        $bucket = Bucket::find($bucketid);
+
+        return view('card.create')->with(compact('bucket'));
     }
 
     /**
