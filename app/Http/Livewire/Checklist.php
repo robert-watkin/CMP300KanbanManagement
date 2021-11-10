@@ -24,7 +24,6 @@ class Checklist extends Component
 
     public function addItem()
     {
-        dd($this->checklist);
         $checklistitem = array();
         $checklistitem[0] = "New Checklist Item";
         $checklistitem[1] = true;

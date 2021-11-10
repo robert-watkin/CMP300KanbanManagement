@@ -11,7 +11,6 @@
                 <p class="ml-4">•</p>
                 <input wire:model.lazy="names.{{ $counter }}" wire:change="nameChanged" class="ml-2" />
             </div>
-            {{ $counter}}
             <input wire:model="ischecked.{{ $counter }}" wire:change="checkboxChanged" class="pr-4 my-auto rounded-md" type="checkbox" />
         </div>
         @php $counter++; @endphp

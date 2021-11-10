@@ -1,7 +1,7 @@
  <div class="flex overflow-x-scroll px-2 pl-6 h-full">
      <div class="flex flex-col md:flex-row md:justify-end h-full mx-auto md:ml-4">
          @foreach($board->buckets()->get() as $bucket)
-         <div class="flex-none flex-col space-y-2 text-left w-48 mx-2">
+         <div class="flex-none flex-col space-y-2 text-left w-56 mx-1">
              <livewire:bucket-component :bucket="$bucket" :key="$bucket->id" />
          </div>
          @endforeach

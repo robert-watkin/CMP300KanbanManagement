@@ -1,5 +1,6 @@
 <x-dashboard-layout>
     <x-slot name="slot">
+
         <div class="flex flex-col h-full p-2">
 
             <div class="max-w-4xl w-full bg-white rounded-lg relative shadow-lg mx-auto my-auto p-2">
@@ -24,6 +25,10 @@
                             <x-jet-input-error for="description" class="mt-2 ml-16" />
                         </div>
 
+                        <!-- Assigned -->
+                        <div>
+                            <livewire:card-assignment :board="$board" />
+                        </div>
 
                         <!-- Checklist component? -->
                         <div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Card;
 use App\Models\Bucket;
+use App\Models\Board;
 use Illuminate\Http\Request;
 
 class CardsController extends Controller
@@ -23,12 +24,17 @@ class CardsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Bucket $bucketid)
+    public function create()
     {
-        //
-        $bucket = Bucket::find($bucketid);
+        if (!request()->has('bucketid')) {
+            return redirect()->route("board.index");
+        }
 
-        return view('card.create')->with(compact('bucket'));
+
+        $bucket = Bucket::find(request()->bucketid)->first();
+        $board = Board::find($bucket->board_id)->first();
+
+        return view('card.create', ['bucket' => $bucket, 'board' => $board]);
     }
 
     /**
