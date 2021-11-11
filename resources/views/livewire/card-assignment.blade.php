@@ -3,18 +3,18 @@
     <div class=" pl-0 pr-48">
 
         @if(isset($assignedtocard))
-        @php $counter = 0; @endphp
-        @foreach($assignedtocard as $user)
+        @php $c = 0; @endphp
+        @foreach($assignedtocard as $key => $user)
         <hr />
         <div class="flex flex-row justify-between hover:bg-gray-100">
             <p class="py-auto  py-2 pl-4">{{ $user->first_name }} {{ $user->last_name }}</p>
-            <div type="button" wire:click="removeUser" class="cursor-pointer my-auto ">
+            <div type="button" wire:click="removeUser({{ $c }})" class="cursor-pointer my-auto ">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </div>
         </div>
-        @php $counter++; @endphp
+        @php $c++; @endphp
         @endforeach
         @endif
 
@@ -39,14 +39,14 @@
 
                                 <ul>
                                     @if(!empty($members))
-
-                                    @foreach($members as $member)
+                                    @php $c = 0; @endphp
+                                    @foreach($members as $key => $member)
                                     <hr />
 
-                                    <li wire:click="assignUser({{ $member->id }})" class="hover:bg-gray-100">
+                                    <li wire:click="assignUser({{ $c }})" class="hover:bg-gray-100">
                                         <p class="flex flex-row py-2 pl-1 cursor-pointer items-center  transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-8002">{{ $member->first_name}} {{ $member->last_name }}</p>
                                     </li>
-
+                                    @php $c++; @endphp
                                     @endforeach
                                     @else
                                     <li>There are no others members on this board</li>

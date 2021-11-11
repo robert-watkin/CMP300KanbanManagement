@@ -52,11 +52,25 @@ class CardAssignment extends Component
     }
 
 
-    public function removeUser()
+    public function removeUser($id)
     {
+        $this->resetObject();
+
+
+        array_push($this->members, $this->assignedtocard[$id]);
+        unset($this->assignedtocard[$id]);
     }
 
     public function assignUser($id)
+    {
+        $this->resetObject();
+
+
+        array_push($this->assignedtocard, $this->members[$id]);
+        unset($this->members[$id]);
+    }
+
+    public function resetObject()
     {
         // laravel converts the eloquent objects to normal arrays for some unknown reason on the action call so setting them back to laravel objects https://github.com/livewire/livewire/issues/27
         $temp = $this->members;
@@ -74,19 +88,6 @@ class CardAssignment extends Component
         foreach ($temp as $member) {
             $user = User::where(['id' => $member['id']])->first();
             array_push($this->assignedtocard, $user);
-        }
-
-
-
-        foreach ($this->members as $member) {
-            if ($member->id == $id) {
-                array_push($this->assignedtocard, $member);
-
-                if (($key = array_search($member, $this->members)) !== false) {
-                    unset($this->members[$key]);
-                }
-                break;
-            }
         }
     }
 }
