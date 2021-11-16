@@ -102,6 +102,12 @@ class BoardsController extends Controller
     public function update(Request $request, Board $board)
     {
         //
+        $request->validate([
+            'title' => [
+                'required'
+            ]
+        ]);
+
         $board = Board::find($board)->first();
         $board->title = $request->input('title');
         $board->save();

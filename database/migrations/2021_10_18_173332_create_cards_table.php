@@ -18,6 +18,7 @@ class CreateCardsTable extends Migration
             $table->string('title');
             $table->string('description');
             $table->unsignedBigInteger('bucket_id');
+            $table->date('deadline');
             $table->foreign('bucket_id')->references('id')->on('buckets')->onDelete('cascade');
             $table->timestamps();
         });

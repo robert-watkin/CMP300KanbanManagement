@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Card;
 use App\Models\Bucket;
 use App\Models\Board;
+use App\Models\CardMember;
+use App\Models\CheckListItem;
 use Illuminate\Http\Request;
 
 class CardsController extends Controller
@@ -30,7 +32,6 @@ class CardsController extends Controller
             return redirect()->route("board.index");
         }
 
-
         $bucket = Bucket::find(request()->bucketid)->first();
         $board = Board::find($bucket->board_id)->first();
 
@@ -45,8 +46,52 @@ class CardsController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        dd($request);
+        $request->validate([
+            'title' => [
+                'required'
+            ],
+            'description' => [
+                'required'
+            ],
+            'deadline' => [
+                'required'
+            ]
+        ]);
+
+
+        // create and save card
+        $card = new Card();
+        $card->title = $request['title'];
+        $card->description = $request['description'];
+        $card->deadline = date('Y-m-d', strtotime($request['deadline']));
+        $card->bucket_id = $request['bucketid'];
+        $card->save();
+
+        // create and save member assignment
+        $assigned = json_decode($request['assigned']);
+
+        foreach ((array) $assigned as $member) {
+            $assignment = new CardMember();
+            $assignment->card_id = $card->id;
+            $assignment->user_id = $member->id;
+
+            $assignment->save();
+        }
+
+        // create and save checklist
+        $checklist = json_decode($request['checklist']);
+
+        foreach ((array) $checklist as $checklistitem) {
+            $item = new CheckListItem();
+            $item->name = $checklistitem[0];
+            $item->is_complete = $checklistitem[1];
+            $item->card_id = $card->id;
+            $item->save();
+        }
+
+        $boardid = $request['boardid'];
+
+        return redirect()->route('board.show', $boardid);
     }
 
     /**
@@ -57,7 +102,7 @@ class CardsController extends Controller
      */
     public function show(Card $card)
     {
-        //
+        // TODO USE THIS ROUTE FOR VIEWERS (NON EDITORS OR ADMINS)
     }
 
     /**

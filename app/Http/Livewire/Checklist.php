@@ -22,8 +22,6 @@ class Checklist extends Component
     public function removeItem($key)
     {
         unset($this->checklist[$key]);
-
-        // $this->checklist = array_values($this->checklist);
     }
 
     public function addItem()

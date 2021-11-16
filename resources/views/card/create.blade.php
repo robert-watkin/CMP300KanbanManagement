@@ -4,8 +4,8 @@
         <div class="flex flex-col h-full p-2">
 
             <div class="max-w-4xl w-full bg-white rounded-lg relative shadow-lg mx-auto my-auto p-2">
-                <form action="{{ route('card.store') }}" method="post">
-                    <input name="_method" type="hidden" value="PUT">
+                <form action="{{ route('card.store', ['boardid' => $board->id, 'bucketid' => $bucket->id]) }}" method="post">
+                    <!-- <input name="_method" type="hidden" value="PUT"> -->
                     {{ csrf_field() }}
 
                     <h1 class="text-lg">New Card</h1>
@@ -38,7 +38,7 @@
                         <!-- Deadline  -->
                         <div class="my-2">
                             <x-jet-label for="deadline" class="flex-none ml-2 mx-4 text-lg" value="{{ __('Deadline') }}" />
-                            <x-date-picker wire:model="deadline" id="deadline" />
+                            <x-date-picker wire:model="deadline" name="deadline" id="deadline" />
                             <x-jet-input-error for="deadline" class="mt-2 ml-16" />
                         </div>
                     </div>
@@ -56,7 +56,9 @@
             import flatpckr from 'flatpickr';
 
             // Maybe add conditions on when to run this
-            flatpckr('#datepicker');
+            flatpckr('#datepicker', {
+                dateFormat: "Y-m-d"
+            });
         </script>
     </x-slot>
 </x-dashboard-layout>

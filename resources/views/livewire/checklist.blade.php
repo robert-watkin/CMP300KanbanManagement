@@ -5,6 +5,7 @@
         @if(isset($checklist))
         @php $counter = 0; @endphp
         @foreach($checklist as $key => $checklistitem)
+
         <hr />
         <div class="flex flex-row justify-between my-1">
             <div class="flex flex-row">
@@ -12,7 +13,7 @@
                 <input wire:model.lazy="checklist.{{ $key }}.0" class="ml-2" />
             </div>
             <div class="flex flex-row">
-                <input wire:model="ischecked.{{ $key }}.0" class="pr-4 mr-4 my-auto rounded-md" type="checkbox" />
+                <input wire:model="checklist.{{ $key }}.1" class="pr-4 mr-4 my-auto rounded-md" type="checkbox" />
                 <div type="button" wire:click="removeItem({{ $key }})" class="cursor-pointer my-auto ">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -20,6 +21,7 @@
                 </div>
             </div>
         </div>
+
         @php $counter++; @endphp
         @endforeach
         @endif
