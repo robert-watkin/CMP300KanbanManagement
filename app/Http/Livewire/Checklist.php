@@ -8,9 +8,6 @@ class Checklist extends Component
 {
 
     public $checklist;
-    public $items;
-    public $names;
-    public $ischecked;
 
     public function render()
     {
@@ -22,33 +19,19 @@ class Checklist extends Component
         return view('livewire.checklist', ['checklist' => $this->checklist]);
     }
 
+    public function removeItem($key)
+    {
+        unset($this->checklist[$key]);
+
+        // $this->checklist = array_values($this->checklist);
+    }
+
     public function addItem()
     {
         $checklistitem = array();
         $checklistitem[0] = "New Checklist Item";
-        $checklistitem[1] = true;
+        $checklistitem[1] = false;
 
         array_push($this->checklist, $checklistitem);
-
-        $this->names[count($this->checklist) - 1] = $checklistitem[0];
-        $this->ischecked[count($this->checklist) - 1] = $checklistitem[1];
-    }
-
-    public function nameChanged()
-    {
-        $c = 0;
-        foreach ($this->names as $name) {
-            $this->checklist[$c][0] = $name;
-            $c++;
-        }
-    }
-
-    public function checkboxChanged()
-    {
-        $c = 0;
-        foreach ($this->ischecked as $check) {
-            $this->checklist[$c][1] = $check;
-            $c++;
-        }
     }
 }
