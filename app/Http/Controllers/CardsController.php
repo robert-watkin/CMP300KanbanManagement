@@ -32,8 +32,9 @@ class CardsController extends Controller
             return redirect()->route("board.index");
         }
 
-        $bucket = Bucket::find(request()->bucketid)->first();
-        $board = Board::find($bucket->board_id)->first();
+
+        $bucket = Bucket::find(request()->bucketid);
+        $board = Board::find($bucket->board_id);
 
         return view('card.create', ['bucket' => $bucket, 'board' => $board]);
     }
@@ -115,7 +116,16 @@ class CardsController extends Controller
     {
         //
         $card = Card::find($card)->first();
-        return view('card.edit')->with(compact('card'));
+
+        if (!request()->has('bucketid')) {
+            return redirect()->route("board.index");
+        }
+
+        $bucket = Bucket::find(request()->bucketid);
+        $board = Board::find($bucket->board_id);
+
+
+        return view('card.edit', ["card" => $card, "bucket" => $bucket, "board" => $board]);
     }
 
     /**

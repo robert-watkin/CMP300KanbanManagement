@@ -38,10 +38,18 @@
                         <!-- Deadline  -->
                         <div class="my-2">
                             <x-jet-label for="deadline" class="flex-none ml-2 mx-4 text-lg" value="{{ __('Deadline') }}" />
-                            <x-date-picker wire:model="deadline" name="deadline" id="deadline" />
+                            <input autocomplete="off" wire:model="deadline" name="deadline" type="text" id="deadline" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" />
                             <x-jet-input-error for="deadline" class="mt-2" />
                         </div>
                     </div>
+
+                    <script src="pikaday.js"></script>
+                    <script>
+                        var picker = new Pikaday({
+                            field: document.getElementById('deadline'),
+                            format: 'YYYY-M-D'
+                        });
+                    </script>
 
                     <div class="flex flex-row justify-end mt-4">
                         <x-jet-button class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full" type="submit">
@@ -52,13 +60,5 @@
             </div>
         </div>
 
-        <script>
-            import flatpckr from 'flatpickr';
-
-            // Maybe add conditions on when to run this
-            flatpckr('#datepicker', {
-                dateFormat: "Y-m-d"
-            });
-        </script>
     </x-slot>
 </x-dashboard-layout>

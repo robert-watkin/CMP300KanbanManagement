@@ -1,5 +1,6 @@
 <x-dashboard-layout>
     <x-slot name="slot">
+
         <div class="flex flex-col h-full p-2">
 
             <div class="max-w-4xl w-full bg-white rounded-lg relative shadow-lg mx-auto my-auto p-2">
@@ -7,18 +8,51 @@
                     <input name="_method" type="hidden" value="PUT">
                     {{ csrf_field() }}
 
-                    <h1 class="text-lg">Task Card</h1>
+                    <h1 class="text-lg">New Card</h1>
 
-                    <div class="my-2">
-                        <div class="flex flex-row ">
-                            <x-jet-label for="title" class="flex-none ml-2 mx-4 my-2 text-lg" value="{{ __('Title') }}" />
-                            <x-jet-input value="{{ $card->title }}" name="title" id="title" type="text" class="flex-grow" wire:model="title" autocomplete="title" />
+                    <div class="px-4">
+                        <!-- Title -->
+                        <div class="my-2 w-full">
+                            <x-jet-label for="title" class="flex-none ml-2 mx-4 text-lg" value="{{ __('Title') }}" />
+                            <x-jet-input value="{{ $card->title }}" name="title" id="title" type="text" class="w-full" wire:model.defer="title" autocomplete="title" />
+                            <x-jet-input-error for="title" class="mt-2" />
                         </div>
-                        <x-jet-input-error for="title" class="mt-2 ml-16" />
+
+                        <!-- Description -->
+                        <div class="my-2">
+                            <x-jet-label for="description" class="flex-none ml-2 mx-4 text-lg" value="{{ __('Description') }}" />
+                            <textarea rows="3" value="" name="description" id="description" type="text" class="w-full overflow-y-hiden resize-none border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" wire:model.defer="description" autocomplete="title">{{ $card->description }}</textarea>
+                            <x-jet-input-error for="description" class="mt-2" />
+                        </div>
+
+                        <!-- Assigned -->
+                        <div>
+                            <livewire:card-assignment :board="$board" />
+                        </div>
+
+                        <!-- Checklist component? -->
+                        <div>
+                            <livewire:checklist />
+                        </div>
+
+                        <!-- Deadline  -->
+                        <div class="my-2">
+                            <x-jet-label for="deadline" class="flex-none ml-2 mx-4 text-lg" value="{{ __('Deadline') }}" />
+                            <input autocomplete="off" wire:model="deadline" name="deadline" type="text" id="deadline" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" />
+                            <x-jet-input-error for="deadline" class="mt-2" />
+                        </div>
                     </div>
 
+                    <script src="pikaday.js"></script>
+                    <script>
+                        var picker = new Pikaday({
+                            field: document.getElementById('deadline'),
+                            format: 'YYYY-M-D'
+                        });
+                        picker.setDate(new Date("{{ $card->deadline}}"));
+                    </script>
 
-                    <div class=" flex flex-row justify-end mt-4">
+                    <div class="flex flex-row justify-end mt-4">
                         <x-jet-button class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full" type="submit">
                             {{ __('Save') }}
                         </x-jet-button>
@@ -35,5 +69,6 @@
                 </form>
             </div>
         </div>
+
     </x-slot>
 </x-dashboard-layout>

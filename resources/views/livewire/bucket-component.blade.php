@@ -12,7 +12,7 @@
 
     @foreach($bucket->cards()->get() as $card)
     <div class="py-2">
-        <livewire:card-component :card="$card" :key="$card->id" />
+        <livewire:card-component :bucket="$bucket" :card="$card" :key="$card->id" />
     </div>
     @endforeach
 
