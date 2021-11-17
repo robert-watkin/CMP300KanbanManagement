@@ -8,9 +8,9 @@
 
         <hr />
         <div class="flex flex-row justify-between my-1">
-            <div class="flex flex-row">
+            <div class="flex flex-row flex-grow">
                 <p class="ml-4">•</p>
-                <input wire:model.lazy="checklist.{{ $key }}.0" class="ml-2" />
+                <input wire:model.lazy="checklist.{{ $key }}.0" class="mx-2 w-full" />
             </div>
             <div class="flex flex-row">
                 <input wire:model="checklist.{{ $key }}.1" class="pr-4 mr-4 my-auto rounded-md" type="checkbox" />
