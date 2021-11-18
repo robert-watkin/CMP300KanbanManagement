@@ -32,7 +32,6 @@ class CardsController extends Controller
             return redirect()->route("board.index");
         }
 
-
         $bucket = Bucket::find(request()->bucketid);
         $board = Board::find($bucket->board_id);
 
@@ -138,6 +137,94 @@ class CardsController extends Controller
     public function update(Request $request, Card $card)
     {
         //
+        $request->validate([
+            'title' => [
+                'required'
+            ],
+            'description' => [
+                'required'
+            ],
+            'deadline' => [
+                'required'
+            ]
+        ]);
+
+        // update record
+
+        $card->title = $request['title'];
+        $card->description = $request['description'];
+        $card->deadline = date('Y-m-d', strtotime($request['deadline']));
+        $card->save();
+
+        // update member assignment
+        $assigned = json_decode($request['assigned']);
+
+        $CardMembers = CardMember::all();
+
+
+        // check through all members assigned to the card - if not found, remove them
+        if ($CardMembers != null) {
+            foreach ($CardMembers as $currentlyAssigned) {
+                foreach ((array) $assigned as $member) {
+                    // find if member exists
+
+                    if ($member->id == $currentlyAssigned->id) {
+                        continue 2;
+                    }
+                }
+
+                $currentlyAssigned->delete();
+            }
+        }
+
+        // add new card members
+        foreach ((array) $assigned as $member) {
+            $check = CardMember::where(['card_id' => $card->id, 'user_id' => $member->id])->first();
+
+            if ($check == null) {
+                $assignment = new CardMember();
+                $assignment->card_id = $card->id;
+                $assignment->user_id = $member->id;
+                $assignment->save();
+            }
+        }
+
+        // create and save checklist
+        $checklist = json_decode($request['checklist']);
+
+        // get all current checklist item
+        $checkListItems = CheckListItem::all();
+
+        // loop through all items
+        foreach ($checkListItems as $currentItem) {
+            foreach ((array) $checklist as $checklistitem) {
+                if ($currentItem->id == $checklistitem[2]) {
+                    // update the checklist item
+                    $currentItem->name = $checklistitem[0];
+                    $currentItem->is_complete = $checklistitem[1];
+                    $currentItem->save();
+
+                    continue 2;
+                }
+            }
+            // remove when not found
+            $currentItem->delete();
+        }
+
+        // create new items
+        foreach ((array) $checklist as $checklistitem) {
+            if ($checklistitem[2] == "new") {
+                $item = new CheckListItem();
+                $item->name = $checklistitem[0];
+                $item->is_complete = $checklistitem[1];
+                $item->card_id = $card->id;
+                $item->save();
+            }
+        }
+
+        $boardid = $request['boardid'];
+
+        return redirect()->route('board.show', $boardid);
     }
 
     /**
@@ -148,6 +235,12 @@ class CardsController extends Controller
      */
     public function destroy(Card $card)
     {
+        $boardid = $card->bucket->board->id;
+
         //
+        $card = Card::find($card)->first();
+        $card->delete();
+
+        return redirect()->route('board.show', $boardid);
     }
 }

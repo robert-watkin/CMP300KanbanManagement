@@ -18,4 +18,9 @@ class Card extends Model
     {
         return $this->hasMany(CardMember::class);
     }
+
+    public function checklist()
+    {
+        return $this->hasMany(CheckListItem::class);
+    }
 }

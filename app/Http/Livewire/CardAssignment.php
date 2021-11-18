@@ -4,8 +4,11 @@ namespace App\Http\Livewire;
 
 use App\Models\Board;
 use App\Models\BoardMember;
+use App\Models\CardMember;
 use App\Models\User;
 use Livewire\Component;
+use Illuminate\Support\Facades\Route;
+
 
 class CardAssignment extends Component
 {
@@ -13,13 +16,15 @@ class CardAssignment extends Component
     public $assignedtocard;
     public $members;
     public $board;
+    public $card;
+    public $dataLoaded = false;
 
     public function render()
     {
         // TODO only allow assignment of editors and admins
-
         $boardmembers = BoardMember::where(['board_id' => $this->board->id])->get();
 
+        // create arrays
         if (!is_array($this->members)) {
             $this->members = array();
         }
@@ -27,6 +32,20 @@ class CardAssignment extends Component
         if (!is_array($this->assignedtocard)) {
             $this->assignedtocard = array();
         }
+
+        // check if on the edit page
+        if (Route::currentRouteName() == "card.edit" && $this->dataLoaded == false) {
+            // loop through all card members currently on the account
+
+            foreach ($this->card->cardMembers as $currentlyAssigned) {
+                // add the user to the assigned list
+                $user = $currentlyAssigned->user()->first();
+                array_push($this->assignedtocard, $user);
+            }
+
+            $dataLoaded = true;
+        }
+
 
         $counter = 0;
         foreach ($boardmembers as $member) {

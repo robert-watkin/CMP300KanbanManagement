@@ -76,8 +76,6 @@ class AddMember extends Component
 
         // set roles from members array
         foreach ($this->members as $member) {
-
-
             $this->roles[$member[4]] = $member[2];
         }
 

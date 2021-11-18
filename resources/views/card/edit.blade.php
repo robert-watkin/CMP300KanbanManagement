@@ -4,7 +4,7 @@
         <div class="flex flex-col h-full p-2">
 
             <div class="max-w-4xl w-full bg-white rounded-lg relative shadow-lg mx-auto my-auto p-2">
-                <form action="{{ route('card.update', ['card' => $card]) }}" method="post">
+                <form action="{{ route('card.update', ['boardid' => $board->id, 'card' => $card]) }}" method="post">
                     <input name="_method" type="hidden" value="PUT">
                     {{ csrf_field() }}
 
@@ -27,12 +27,12 @@
 
                         <!-- Assigned -->
                         <div>
-                            <livewire:card-assignment :board="$board" />
+                            <livewire:card-assignment :card="$card" :board="$board" />
                         </div>
 
                         <!-- Checklist component? -->
                         <div>
-                            <livewire:checklist />
+                            <livewire:checklist :card="$card" />
                         </div>
 
                         <!-- Deadline  -->
@@ -59,7 +59,7 @@
                     </div>
                 </form>
 
-                <form class="absolute left-2 bottom-2" action="{{ route('card.destroy' , $card->id)}}" method="POST">
+                <form class="absolute left-2 bottom-2" action="{{ route('card.destroy' , $card->id) }}" method="POST">
                     <input name="_method" type="hidden" value="DELETE">
                     {{ csrf_field() }}
 
