@@ -1,6 +1,6 @@
 <div class="my-2">
     <x-jet-label for="assigned" class="flex-none ml-2 mx-4 text-lg" value="{{ __('Assigned') }}" />
-    <div class=" pl-0 pr-48">
+    <div class=" pl-0">
 
         @if(isset($assignedtocard))
         @php $c = 0; @endphp

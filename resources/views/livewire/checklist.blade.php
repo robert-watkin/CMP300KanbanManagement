@@ -1,6 +1,6 @@
 <div class="my-2">
     <x-jet-label for="Checklist" class="flex-none ml-2 mx-4 text-lg" value="{{ __('Checklist') }}" />
-    <div class=" pl-0 pr-48">
+    <div class=" pl-0">
 
         @if(isset($checklist))
         @php $counter = 0; @endphp
