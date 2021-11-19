@@ -23,4 +23,9 @@ class Card extends Model
     {
         return $this->hasMany(CheckListItem::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

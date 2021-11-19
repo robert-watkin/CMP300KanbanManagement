@@ -71,7 +71,7 @@
                 </div>
 
                 <div>
-                    <livewire:comments :card="$card" :key="$card->id" />
+                    <livewire:comments :card="$card" />
                 </div>
             </div>
         </div>
