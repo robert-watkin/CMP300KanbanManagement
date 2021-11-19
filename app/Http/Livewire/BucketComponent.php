@@ -9,13 +9,16 @@ use App\Models\Card;
 class BucketComponent extends Component
 {
 
+    protected $listeners = ['cardMoved' => '$refresh'];
+
     public $bucket;
     public $bucketTitle;
 
     public function render()
     {
         $this->bucketTitle = $this->bucket->title;
-        return view('livewire.bucket-component')->with('bucket', $this->bucket);
+        $cards = $this->bucket->cards()->get();
+        return view('livewire.bucket-component', ['bucket' => $this->bucket, 'cards' => $cards]);
     }
 
     public function deleteBucket()

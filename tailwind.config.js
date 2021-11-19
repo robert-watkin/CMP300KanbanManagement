@@ -19,6 +19,7 @@ module.exports = {
             '48': '12rem'
         },
         extend: {
+            animation:['animate-spin'],
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },

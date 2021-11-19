@@ -10,12 +10,8 @@ class CardComponent extends Component
 
     public function render()
     {
-        $links = $this->card->cardMembers()->get();
-        $users = array();
-        foreach ($links as $link) {
-            $user = $link->user()->get();
-            array_push($users, $user[0]);
-        }
+
+        $users = $this->card->users()->get();
 
         return view('livewire.card-component', ['bucketid' => $this->card->bucket_id, 'card' => $this->card, 'assigned' => $users]);
     }
