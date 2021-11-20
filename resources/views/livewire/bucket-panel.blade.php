@@ -31,14 +31,22 @@
     }
 
     function drop(ev, bucket_id) {
+
         ev.preventDefault();
         var data = ev.dataTransfer.getData("text");
         var card = document.getElementById(data);
         card.style.display = "none";
-        Livewire.emit('movingCard', [this.card_id, bucket_id]);
+
+        var els = document.querySelectorAll('.cardDraggable');
+        for (var i = 0; i < els.length; i++) {
+            els[i].setAttribute("draggable", "false");
+        }
 
         var spinner = document.getElementById(bucket_id);
         spinner.style.display = "inline";
+
+        Livewire.emit('movingCard', [this.card_id, bucket_id]);
+
     }
 </script>
 @endpush

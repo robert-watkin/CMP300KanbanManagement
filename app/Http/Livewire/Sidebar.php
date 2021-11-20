@@ -14,16 +14,13 @@ class Sidebar extends Component
         $user = Auth::user();
 
         // get boards
-        $boardLinks = $user->boards()->get();
+        $boardLinks = $user->boards()->where(['status' => 'Accepted'])->get();
         $boardList = array();
         foreach ($boardLinks as $boardLink) {
             $boards = $boardLink->board()->get();
             $board = $boards[0];
             array_push($boardList, $board);
         }
-
-        // TODO notifications
-
 
 
         return view('livewire.sidebar')->with(compact('boardList', 'user'));

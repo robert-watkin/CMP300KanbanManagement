@@ -23,8 +23,14 @@ module.exports = {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
+            
         },
     },
+    variants: {
+        extend: {
+         stroke: ['hover', 'focus'],
+        }
+      },
 
     plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
 };

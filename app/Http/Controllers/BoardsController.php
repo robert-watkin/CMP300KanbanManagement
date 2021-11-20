@@ -75,7 +75,8 @@ class BoardsController extends Controller
      */
     public function show(Board $board)
     {
-        //
+        // TODO check if user is a member of the board
+
         return view('board.index')->with(compact('board'));
     }
 
