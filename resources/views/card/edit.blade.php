@@ -44,7 +44,6 @@
                             </div>
                         </div>
 
-                        <script src="pikaday.js"></script>
                         <script>
                             var picker = new Pikaday({
                                 field: document.getElementById('deadline'),

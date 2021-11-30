@@ -159,7 +159,7 @@ class CardsController extends Controller
         // update member assignment
         $assigned = json_decode($request['assigned']);
 
-        $CardMembers = CardMember::all();
+        $CardMembers = CardMember::where(['card_id' => $card->id])->get();
 
 
         // check through all members assigned to the card - if not found, remove them
@@ -193,7 +193,7 @@ class CardsController extends Controller
         $checklist = json_decode($request['checklist']);
 
         // get all current checklist item
-        $checkListItems = CheckListItem::all();
+        $checkListItems = CheckListItem::where(['card_id' => $card->id])->get();
 
         // loop through all items
         foreach ($checkListItems as $currentItem) {

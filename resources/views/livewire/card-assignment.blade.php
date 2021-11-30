@@ -43,8 +43,8 @@
                                     @foreach($members as $key => $member)
                                     <hr />
 
-                                    <li wire:click="assignUser({{ $c }})" class="hover:bg-gray-100">
-                                        <p class="flex flex-row py-2 pl-1 cursor-pointer items-center  transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-8002">{{ $member->first_name}} {{ $member->last_name }}</p>
+                                    <li class="hover:bg-gray-100" wire:click="assignUser({{ $c }})" wire:loading.class="pointer-events-none">
+                                        <p class="flex flex-row py-2 pl-1 cursor-pointer items-center  transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">{{ $member->first_name}} {{ $member->last_name }}</p>
                                     </li>
                                     @php $c++; @endphp
                                     @endforeach
