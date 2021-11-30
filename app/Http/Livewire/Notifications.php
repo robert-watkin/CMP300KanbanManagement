@@ -3,6 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Models\BoardMember;
+use App\Models\Card;
+use App\Models\CardMember;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,8 +12,24 @@ class Notifications extends Component
 {
     public function render()
     {
+        // get board invitations
         $thisUserMember = BoardMember::where(['user_id' => Auth::user()->id, 'status' => 'Pending'])->get();
-        return view('livewire.notifications', ['invitations' => $thisUserMember]);
+
+        // get overdue tasks
+        // get all cards the user is assigned to 
+        $assignedCards = CardMember::where(['user_id' => Auth::user()->id])->get();
+
+        // check deadlines on the cards
+        $now = date("Y-m-d");
+        $lateTasks = array();
+        foreach ($assignedCards as $cardLink) {
+            $card = $cardLink->card()->first();
+            if ($card->deadline < $now) {
+                array_push($lateTasks, $card);
+            }
+        }
+
+        return view('livewire.notifications', ['invitations' => $thisUserMember, 'lateTasks' => $lateTasks]);
     }
 
     public function acceptInvitation($boardMember)

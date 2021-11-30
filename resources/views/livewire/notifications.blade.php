@@ -7,7 +7,7 @@
         @else
         <span class="inline-flex rounded-md mt-3">
             <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition">
-                @if (count($invitations) == 0)
+                @if (count($invitations) == 0 && count($lateTasks) == 0)
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                 </svg>
@@ -27,11 +27,13 @@
     <x-slot name="content">
         <div>
             <div class="p-1">
-                <h2 class="text-sm">Invitations</h2>
-                @if (count($invitations) == 0)
+                <h2 class="text-sm">Notifications</h2>
+                @if (count($invitations) == 0 && count($lateTasks) == 0)
                 <hr />
-                <h3>No Invitations</h3>
+                <h3>No Notifications</h3>
                 @else
+
+                @if (!count($invitations) == 0)
                 @foreach($invitations as $invitation)
                 <hr />
                 <div class="flex flex-row justify-between p-2">
@@ -53,6 +55,20 @@
                     <div wire:loading wire:target="acceptInvitation, declineInvitation" class="animate-spin rounded-full h-4 w-4 border-t-2 mx-auto border-b-2 border-purple-500"></div>
                 </div>
                 @endforeach
+                @endif
+
+
+
+                @if (!count($lateTasks) == 0)
+                @foreach($lateTasks as $card)
+                <hr />
+                <div class="flex flex-row justify-between p-2">
+                    <a href="{{ route('card.edit', ['card' => $card, 'bucketid' => $card->bucket_id]) }}" class="flex flex-grow text-xs font-semibold text-red-800">Late Task: {{$card->title}}</a>
+
+                    <div wire:loading wire:target="acceptInvitation, declineInvitation" class="animate-spin rounded-full h-4 w-4 border-t-2 mx-auto border-b-2 border-purple-500"></div>
+                </div>
+                @endforeach
+                @endif
                 @endif
 
             </div>
