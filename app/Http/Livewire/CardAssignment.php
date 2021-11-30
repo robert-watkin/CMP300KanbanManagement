@@ -21,8 +21,8 @@ class CardAssignment extends Component
 
     public function render()
     {
-        // TODO only allow assignment of editors and admins
-        $boardmembers = BoardMember::where(['board_id' => $this->board->id])->get();
+        // only allow assignment of editors and admins
+        $boardmembers = BoardMember::where(['board_id' => $this->board->id])->where('role', '!=', 'Viewer')->get();
 
         // create arrays
         if (!is_array($this->members)) {
