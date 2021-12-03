@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BoardsController;
 use App\Http\Controllers\CardsController;
 
@@ -31,3 +32,6 @@ Route::get('/', function () {
 
 Route::resource('board', BoardsController::class)->middleware(['auth:sanctum', 'verified']);
 Route::resource('card', CardsController::class)->middleware(['auth:sanctum', 'verified']);
+
+Route::get('/admin/users', [AdminController::class, 'users'])->middleware(['auth:sanctum', 'verified']);
+Route::get('/admin/boards', [AdminController::class, 'boards'])->middleware(['auth:sanctum', 'verified']);
