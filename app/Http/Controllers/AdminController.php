@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Board;
 
 class AdminController extends Controller
 {
@@ -16,6 +17,7 @@ class AdminController extends Controller
 
     public function boards()
     {
-        return view('admin.boards');
+        $boards = Board::all();
+        return view('admin.boards', ['boards' => $boards]);
     }
 }

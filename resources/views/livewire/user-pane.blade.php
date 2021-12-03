@@ -11,11 +11,11 @@
     </td>
 
     <td class="px-6 py-4 whitespace-nowrap">
-        <input wire:model="lastname" value="{{ $user->last_name }}" class="text-sm font-medium bg-white text-gray-900 @if($editable) border-2 border-r-2 @endif" @if(!$editable) disabled @endif />
+        <input wire:model="lastname" value="{{ $lastname }}" class="text-sm font-medium bg-white text-gray-900 @if($editable) border-2 border-r-2 @endif" @if(!$editable) disabled @endif />
     </td>
 
     <td class="px-6 py-4 whitespace-nowrap ">
-        <input wire:model="email" value="{{ $user->email }}" class="text-sm bg-white text-gray-500 w-52 @if($editable) border-2 border-r-8 @endif" @if(!$editable) disabled @endif />
+        <input wire:model="email" value="{{ $email }}" class="text-sm bg-white text-gray-500 w-52 @if($editable) border-2 border-r-8 @endif" @if(!$editable) disabled @endif />
     </td>
 
     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
