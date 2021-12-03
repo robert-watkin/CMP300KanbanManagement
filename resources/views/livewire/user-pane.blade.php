@@ -11,11 +11,11 @@
     </td>
 
     <td class="px-6 py-4 whitespace-nowrap">
-        <input value="{{ $user->last_name }}" class="text-sm font-medium bg-white text-gray-900 @if($editable) border-2 border-r-2 @endif" @if(!$editable) disabled @endif />
+        <input wire:model="lastname" value="{{ $user->last_name }}" class="text-sm font-medium bg-white text-gray-900 @if($editable) border-2 border-r-2 @endif" @if(!$editable) disabled @endif />
     </td>
 
     <td class="px-6 py-4 whitespace-nowrap ">
-        <input value="{{ $user->email }}" class="text-sm bg-white text-gray-500 w-52 @if($editable) border-2 border-r-8 @endif" @if(!$editable) disabled @endif />
+        <input wire:model="email" value="{{ $user->email }}" class="text-sm bg-white text-gray-500 w-52 @if($editable) border-2 border-r-8 @endif" @if(!$editable) disabled @endif />
     </td>
 
     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -48,7 +48,11 @@
     </td>
     @else
     <td class="px-1 py-4 whitespace-nowrap text-right text-sm font-medium">
-        <button wire:click="save" class="text-indigo-600 hover:text-indigo-900">Save</button>
+        <button wire:click="save" class="text-indigo-600 hover:text-indigo-900">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+            </svg>
+        </button>
     </td>
     @endif
     <td class="px-2 py-4 whitespace-nowrap text-right text-sm font-medium">

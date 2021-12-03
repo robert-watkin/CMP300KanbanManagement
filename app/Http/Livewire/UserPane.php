@@ -40,6 +40,15 @@ class UserPane extends Component
 
     public function save()
     {
+
+
+        $this->user->first_name = $this->firstname;
+        $this->user->last_name = $this->lastname;
+        $this->user->email = $this->email;
+        $this->user->role = $this->role;
+        $this->user->save();
+
+
         $this->editable = false;
     }
 
@@ -56,7 +65,7 @@ class UserPane extends Component
 
     public function delete()
     {
-        //$this->user->delete();
+        $this->user->delete();
         $this->user = null;
     }
 }
