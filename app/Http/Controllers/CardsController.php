@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Card;
 use App\Models\Bucket;
 use App\Models\Board;
@@ -11,15 +12,6 @@ use Illuminate\Http\Request;
 
 class CardsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -34,6 +26,20 @@ class CardsController extends Controller
 
         $bucket = Bucket::find(request()->bucketid);
         $board = Board::find($bucket->board_id);
+
+        // check if user is a member of the board
+        if (Auth::user()->role != "Admin") {
+            $isMember = false;
+            foreach ($board->users as $link) {
+                if ($link->user_id == Auth::user()->id) {
+                    $isMember = true;
+                }
+
+                if ($isMember === false) {
+                    return redirect()->route('board.index');
+                }
+            }
+        }
 
         return view('card.create', ['bucket' => $bucket, 'board' => $board]);
     }
@@ -94,16 +100,6 @@ class CardsController extends Controller
         return redirect()->route('board.show', $boardid);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Card  $card
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Card $card)
-    {
-        // TODO USE THIS ROUTE FOR VIEWERS (NON EDITORS OR ADMINS)
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -113,7 +109,22 @@ class CardsController extends Controller
      */
     public function edit(Card $card)
     {
-        //
+        $board = $card->bucket->board;
+        // check if user is a member of the board
+        if (Auth::user()->role != "Admin") {
+            $isMember = false;
+            foreach ($board->users as $link) {
+                if ($link->user_id == Auth::user()->id) {
+                    $isMember = true;
+                }
+
+                if ($isMember === false) {
+                    return redirect()->route('board.index');
+                }
+            }
+        }
+
+
         $card = Card::find($card)->first();
 
         if (!request()->has('bucketid')) {
@@ -136,6 +147,22 @@ class CardsController extends Controller
      */
     public function update(Request $request, Card $card)
     {
+
+        $board = $card->bucket->board;
+        // check if user is a member of the board
+        if (Auth::user()->role != "Admin") {
+            $isMember = false;
+            foreach ($board->users as $link) {
+                if ($link->user_id == Auth::user()->id) {
+                    $isMember = true;
+                }
+
+                if ($isMember === false) {
+                    return redirect()->route('board.index');
+                }
+            }
+        }
+
         //
         $request->validate([
             'title' => [
@@ -235,6 +262,21 @@ class CardsController extends Controller
      */
     public function destroy(Card $card)
     {
+        $board = $card->bucket->board;
+        // check if user is a member of the board
+        if (Auth::user()->role != "Admin") {
+            $isMember = false;
+            foreach ($board->users as $link) {
+                if ($link->user_id == Auth::user()->id) {
+                    $isMember = true;
+                }
+
+                if ($isMember === false) {
+                    return redirect()->route('board.index');
+                }
+            }
+        }
+
         $boardid = $card->bucket->board->id;
 
         //

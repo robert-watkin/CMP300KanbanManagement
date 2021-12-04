@@ -63,7 +63,10 @@
                 @foreach($lateTasks as $card)
                 <hr />
                 <div class="flex flex-row justify-between p-2">
-                    <a href="{{ route('card.edit', ['card' => $card, 'bucketid' => $card->bucket_id]) }}" class="flex flex-grow text-xs font-semibold text-red-800">Late Task: {{$card->title}}</a>
+                    <a href="{{ route('card.edit', ['card' => $card, 'bucketid' => $card->bucket_id]) }}" class="flex flex-col font-semibold text-red-800">
+                        <p class="text-xs">Late Task:</p>
+                        <p class="text-s">{{$card->title}}</p>
+                    </a>
 
                     <div wire:loading wire:target="acceptInvitation, declineInvitation" class="animate-spin rounded-full h-4 w-4 border-t-2 mx-auto border-b-2 border-purple-500"></div>
                 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Board;
 use App\Models\BoardMember;
 use Illuminate\Http\Request;
@@ -75,9 +76,21 @@ class BoardsController extends Controller
      */
     public function show(Board $board)
     {
-        // TODO check if user is a member of the board
+        // check if user is a member of the board
+        if (Auth::user()->role != "Admin") {
+            $isMember = false;
+            foreach ($board->users as $link) {
+                if ($link->user_id == Auth::user()->id) {
+                    $isMember = true;
+                }
 
-        return view('board.index')->with(compact('board'));
+                if ($isMember === false) {
+                    return redirect()->route('board.index');
+                }
+            }
+        }
+
+        return view('board.show')->with(compact('board'));
     }
 
     /**
@@ -88,6 +101,21 @@ class BoardsController extends Controller
      */
     public function edit(Board $board)
     {
+        // check if user is a member of the board
+        if (Auth::user()->role != "Admin") {
+            $isMember = false;
+            foreach ($board->users as $link) {
+                if ($link->user_id == Auth::user()->id) {
+                    $isMember = true;
+                }
+
+                if ($isMember === false) {
+                    return redirect()->route('board.index');
+                }
+            }
+        }
+
+
         $board = Board::find($board)->first();
 
         return view('board.edit')->with(compact('board'));
@@ -102,7 +130,20 @@ class BoardsController extends Controller
      */
     public function update(Request $request, Board $board)
     {
-        //
+        // check if user is a member of the board
+        if (Auth::user()->role != "Admin") {
+            $isMember = false;
+            foreach ($board->users as $link) {
+                if ($link->user_id == Auth::user()->id) {
+                    $isMember = true;
+                }
+
+                if ($isMember === false) {
+                    return redirect()->route('board.index');
+                }
+            }
+        }
+
         $request->validate([
             'title' => [
                 'required'
@@ -161,6 +202,21 @@ class BoardsController extends Controller
      */
     public function destroy(Board $board)
     {
+        // check if user is a member of the board
+        if (Auth::user()->role != "Admin") {
+            $isMember = false;
+            foreach ($board->users as $link) {
+                if ($link->user_id == Auth::user()->id) {
+                    $isMember = true;
+                }
+
+                if ($isMember === false) {
+                    return redirect()->route('board.index');
+                }
+            }
+        }
+
+
         $board = Board::find($board)->first();
         $board->delete();
 
