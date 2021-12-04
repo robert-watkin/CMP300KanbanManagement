@@ -19,13 +19,18 @@ class Notifications extends Component
         // get all cards the user is assigned to 
         $assignedCards = CardMember::where(['user_id' => Auth::user()->id])->get();
 
+
+
         // check deadlines on the cards
         $now = date("Y-m-d");
         $lateTasks = array();
         foreach ($assignedCards as $cardLink) {
-            $card = $cardLink->card()->first();
-            if ($card->deadline < $now) {
-                array_push($lateTasks, $card);
+            $boardLink = BoardMember::where(['board_id' => $cardLink->card->bucket->board->id, 'user_id' => Auth::user()->id])->first();
+            if ($boardLink->status == "Accepted") {
+                $card = $cardLink->card()->first();
+                if ($card->deadline < $now) {
+                    array_push($lateTasks, $card);
+                }
             }
         }
 

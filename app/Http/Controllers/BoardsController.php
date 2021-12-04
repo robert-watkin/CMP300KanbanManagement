@@ -83,10 +83,10 @@ class BoardsController extends Controller
                 if ($link->user_id == Auth::user()->id) {
                     $isMember = true;
                 }
+            }
 
-                if ($isMember === false) {
-                    return redirect()->route('board.index');
-                }
+            if ($isMember === false) {
+                return redirect()->route('board.index');
             }
         }
 
@@ -108,10 +108,10 @@ class BoardsController extends Controller
                 if ($link->user_id == Auth::user()->id) {
                     $isMember = true;
                 }
+            }
 
-                if ($isMember === false) {
-                    return redirect()->route('board.index');
-                }
+            if ($isMember === false) {
+                return redirect()->route('board.index');
             }
         }
 
@@ -137,10 +137,10 @@ class BoardsController extends Controller
                 if ($link->user_id == Auth::user()->id) {
                     $isMember = true;
                 }
+            }
 
-                if ($isMember === false) {
-                    return redirect()->route('board.index');
-                }
+            if ($isMember === false) {
+                return redirect()->route('board.index');
             }
         }
 
@@ -209,10 +209,10 @@ class BoardsController extends Controller
                 if ($link->user_id == Auth::user()->id) {
                     $isMember = true;
                 }
+            }
 
-                if ($isMember === false) {
-                    return redirect()->route('board.index');
-                }
+            if ($isMember === false) {
+                return redirect()->route('board.index');
             }
         }
 
