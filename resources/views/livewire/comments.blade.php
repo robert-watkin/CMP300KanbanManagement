@@ -3,6 +3,10 @@
 
     <div class="p-2">
 
+        @php
+        $link = auth()->user()->boards()->where(['board_id' => $card->bucket->board->id])->first();
+        @endphp
+
         <!-- TODO display comments -->
         @foreach ($comments as $comment)
         <div>
@@ -36,6 +40,8 @@
 
         <hr class="mb-2" />
 
+
+        @if ($link->role != "Viewer")
         <div class="flex flex-row">
             <x-jet-input name="comment" id="comment" type="text" class="flex-grow overflow-y-hiden resize-none border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" wire:model.defer="commentContent"></x-jet-input>
             <div class="py-1 ml-2">
@@ -44,5 +50,6 @@
                 </x-jet-button>
             </div>
         </div>
+        @endif
     </div>
 </div>

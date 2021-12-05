@@ -5,6 +5,10 @@
             <livewire:bucket-component :bucket="$bucket" :key="$bucket->id" />
         </div>
         @endforeach
+        @php
+        $link = auth()->user()->boards()->where(['board_id' => $board->id])->first();
+        @endphp
+        @if ($link->role != "Viewer")
         <div class="flex-none min-w-24 float-right text-center mx-3 pt-4">
             <button type="button" wire:click="newBucket" wire:loading.attr="disabled" class="bg-gray-100 hover:bg-gray-400 text-gray-800 py-1 pl-2 pr-3 border-2 border-r-2 rounded-full inline-flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -13,10 +17,12 @@
                 <span class="">New Bucket</span>
             </button>
         </div>
+        @endif
     </div>
 
 </div>
 
+@if ($link->role != "Viewer")
 @push('scripts')
 <script>
     var card_id;
@@ -50,3 +56,4 @@
     }
 </script>
 @endpush
+@endif

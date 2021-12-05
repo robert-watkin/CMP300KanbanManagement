@@ -1,6 +1,9 @@
 <div class="my-2">
     <x-jet-label for="assigned" class="flex-none ml-2 mx-4 text-lg" value="{{ __('Assigned') }}" />
     <div class=" pl-0">
+        @php
+        $link = auth()->user()->boards()->where(['board_id' => $card->bucket->board->id])->first();
+        @endphp
 
         @if(isset($assignedtocard))
         @php $c = 0; @endphp
@@ -8,17 +11,21 @@
         <hr />
         <div class="flex flex-row justify-between hover:bg-gray-100">
             <p class="py-auto  py-2 pl-4">{{ $user->first_name }} {{ $user->last_name }}</p>
+            @if ($link->role != "Viewer")
             <div type="button" wire:click="removeUser({{ $c }})" class="cursor-pointer my-auto ">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </div>
+            @endif
         </div>
         @php $c++; @endphp
         @endforeach
         @endif
 
         <hr />
+
+        @if ($link->role != "Viewer")
         <div class="flex flex-row justify-start py-2">
 
             <div class="flex flex-col pb-1">
@@ -64,6 +71,7 @@
                 </div>
             </div>
         </div>
+        @endif
     </div>
 
     <x-jet-input-error for="assigned" class="mt-2 ml-16" />

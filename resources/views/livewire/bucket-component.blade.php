@@ -21,6 +21,11 @@
     </div>
     @endforeach
 
+    @php
+    $link = auth()->user()->boards()->where(['board_id' => $bucket->board->id])->first();
+    @endphp
+
+    @if ($link->role != "Viewer")
     <div class="flex justify-center mt-2">
         <a href="{{ route('card.create', ['bucketid' => $bucket->id]) }}" wire:loading.attr="disabled" class="bg-gray-100 hover:bg-gray-400 text-gray-800 py-1 pl-1 pr-2 border-2 border-r-2 rounded-full inline-flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -29,4 +34,5 @@
             <span>New Card</span>
         </a>
     </div>
+    @endif
 </div>
