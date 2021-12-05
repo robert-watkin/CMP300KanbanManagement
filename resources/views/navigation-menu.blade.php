@@ -17,6 +17,7 @@
                     </x-jet-nav-link>
                 </div>
 
+                @if (auth()->user()->role === "Admin")
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="/admin/users" :active="request()->routeIs('board.index')">
                         {{ __('Users') }}
@@ -28,6 +29,7 @@
                         {{ __('Boards') }}
                     </x-jet-nav-link>
                 </div>
+                @endif
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">

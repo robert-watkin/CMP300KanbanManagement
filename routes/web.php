@@ -24,14 +24,13 @@ Route::get('/', function () {
     return redirect('/board');
 });
 
-// Route::middleware(['auth:sanctum', 'verified'])->get('/board', function () {
 
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('board', BoardsController::class);
+    Route::resource('card', CardsController::class);
 
-//     return view('dashboard');
-// })->name('dashboard');
-
-Route::resource('board', BoardsController::class)->middleware(['auth:sanctum', 'verified']);
-Route::resource('card', CardsController::class)->middleware(['auth:sanctum', 'verified']);
-
-Route::get('/admin/users', [AdminController::class, 'users'])->middleware(['auth:sanctum', 'verified']);
-Route::get('/admin/boards', [AdminController::class, 'boards'])->middleware(['auth:sanctum', 'verified']);
+    Route::group(['middleware' => 'role:admin', 'prefix' => 'admin', 'as' => 'admin.'], function () {
+        Route::get('/users', [AdminController::class, 'users'])->name('users');
+        Route::get('/boards', [AdminController::class, 'boards'])->name('boards');
+    });
+});
