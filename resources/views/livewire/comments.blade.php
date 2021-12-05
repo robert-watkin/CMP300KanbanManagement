@@ -40,7 +40,16 @@
 
         <hr class="mb-2" />
 
-
+        @if (auth()->user()->role == "Admin")
+        <div class="flex flex-row">
+            <x-jet-input name="comment" id="comment" type="text" class="flex-grow overflow-y-hiden resize-none border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" wire:model.defer="commentContent"></x-jet-input>
+            <div class="py-1 ml-2">
+                <x-jet-button type="button" wire:click="send" class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full" wire:loading.attr="disabled ">
+                    {{ __('Send') }}
+                </x-jet-button>
+            </div>
+        </div>
+        @else
         @if ($link->role != "Viewer")
         <div class="flex flex-row">
             <x-jet-input name="comment" id="comment" type="text" class="flex-grow overflow-y-hiden resize-none border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" wire:model.defer="commentContent"></x-jet-input>
@@ -50,6 +59,7 @@
                 </x-jet-button>
             </div>
         </div>
+        @endif
         @endif
     </div>
 </div>

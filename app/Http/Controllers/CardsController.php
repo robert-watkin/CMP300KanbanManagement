@@ -20,12 +20,21 @@ class CardsController extends Controller
      */
     public function create()
     {
+
         if (!request()->has('bucketid')) {
             return redirect()->route("board.index");
         }
 
         $bucket = Bucket::find(request()->bucketid);
         $board = Board::find($bucket->board_id);
+
+        if (auth()->user()->role != "Admin") {
+            $link = auth()->user()->boards()->where(['board_id' => $board->id])->first();
+
+            if ($link->role == "Viewer") {
+                return redirect()->route('board.show', $board);
+            }
+        }
 
         // check if user is a member of the board
         if (Auth::user()->role != "Admin") {

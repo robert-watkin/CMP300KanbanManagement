@@ -17,10 +17,14 @@
                     <div class="my-2">
                         <div class="flex flex-row ">
                             <x-jet-label for="title" class="flex-none ml-2 mx-4 my-2 text-lg" value="{{ __('Title') }}" />
+                            @if (auth()->user()->role == "Admin")
+                            <x-jet-input value="{{ $board->title }}" name="title" id="title" type="text" class="flex-grow" wire:model="title" autocomplete="title" />
+                            @else
                             @if ($link->role == "Admin")
                             <x-jet-input value="{{ $board->title }}" name="title" id="title" type="text" class="flex-grow" wire:model="title" autocomplete="title" />
                             @else
                             <x-jet-input disabled value="{{ $board->title }}" name="title" id="title" type="text" class="flex-grow" wire:model="title" autocomplete="title" />
+                            @endif
                             @endif
                         </div>
                         <x-jet-input-error for="title" class="mt-2 ml-16" />
@@ -30,6 +34,13 @@
                         <livewire:add-member :board="$board" />
                     </div>
 
+                    @if (auth()->user()->role == "Admin")
+                    <div class=" flex flex-row justify-end mt-4">
+                        <x-jet-button class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full" type="submit">
+                            {{ __('Save') }}
+                        </x-jet-button>
+                    </div>
+                    @else
                     @if ($link->role == "Admin")
                     <div class=" flex flex-row justify-end mt-4">
                         <x-jet-button class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full" type="submit">
@@ -37,8 +48,19 @@
                         </x-jet-button>
                     </div>
                     @endif
+                    @endif
                 </form>
 
+                @if (auth()->user()->role == "Admin")
+                <form class="absolute left-2 bottom-2" action="{{ route('board.destroy' , $board->id)}}" method="POST">
+                    <input name="_method" type="hidden" value="DELETE">
+                    {{ csrf_field() }}
+
+                    <x-jet-button class="bg-red-500 hover:bg-red-700 text-white font-bold rounded-full" type="submit">
+                        {{ __('Delete') }}
+                    </x-jet-button>
+                </form>
+                @else
                 @if ($link->role == "Admin")
                 <form class="absolute left-2 bottom-2" action="{{ route('board.destroy' , $board->id)}}" method="POST">
                     <input name="_method" type="hidden" value="DELETE">
@@ -48,6 +70,7 @@
                         {{ __('Delete') }}
                     </x-jet-button>
                 </form>
+                @endif
                 @endif
             </div>
         </div>
