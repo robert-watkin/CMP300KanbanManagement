@@ -1,16 +1,15 @@
 <div class="mt-4 mb-6">
-    <!-- Members -->
-    @isset($error)
-    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-        <strong class="font-bold">Sorry!</strong>
-        <span class="block sm:inline">{{ $error }}</span>
-    </div>
-    @endisset
 
     <div class="flex flex-row justify-between mt-2">
         <x-jet-label for="members" class="flex-none ml-2 mx-4 pt-5 text-lg" value="{{ __('Members') }}" />
 
+        @php
+        $link = auth()->user()->boards()->where(['board_id' => $board->id])->first();
+        @endphp
+
+
         <!-- Add Members -->
+        @if ($link->role == "Admin")
         <div class="flex flex-col pt-4 pb-1">
             <div class="relative">
                 <x-jet-dropdown align="bottom" style="bottom:100%;" width="60">
@@ -53,6 +52,7 @@
                 </x-jet-dropdown>
             </div>
         </div>
+        @endif
     </div>
 
     <!-- Member table -->
@@ -73,7 +73,7 @@
                 <td class="px-6 align-middle py-3 text-xs whitespace-nowrap font-semibold text-left">{{ $member[0] }}</td>
                 <td class="px-6 align-middle py-3 text-xs whitespace-nowrap font-semibold text-left">{{ $member[1] }}</td>
                 <td class="px-6 align-middle text-xs whitespace-nowrap font-semibold text-left w-12">
-                    @if($first)
+                    @if($first || $link->role != "Admin")
                     {{ $member[2] }}
                     @else
                     <select wire:model="roles.{{ $member[4] }}" wire:change="roleChange" name="role" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md text-sm h-10 shadow-sm">
@@ -87,7 +87,7 @@
                     @endif
                 </td>
                 <td class="flex flex-row justify-between py-3">
-                    @if(!$first)
+                    @if(!$first && $link->role == "Admin")
                     <button type="button" wire:click="removeMember({{ json_encode($member) }})" class="cursor-pointer mr-1 my-auto" wire:loading.attr="disabled">
                         <svg xmlns="http://www.w3.org/2000/svg" class="ml-3 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
