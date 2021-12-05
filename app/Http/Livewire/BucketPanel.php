@@ -21,6 +21,11 @@ class BucketPanel extends Component
 
     public function newBucket()
     {
+        // check if limit of 6 has been reached
+        if (count($this->board->buckets) >= 6) {
+            return;
+        }
+
         $bucket = new Bucket();
         $bucket->board_id = $this->board->id;
         $bucket->title = "New Bucket";
