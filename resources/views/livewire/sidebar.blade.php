@@ -17,7 +17,7 @@
         <div class="px-4 mx-2">
             <!-- Settings Dropdown -->
             <div class="flex flex-col">
-                <div class="relative">
+                <div class="relative mx-auto">
                     <x-jet-dropdown align="left" style="bottom:100%;" width="48">
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -92,8 +92,8 @@
                 </ul>
             </div>
 
-            <div>
-                <a href="{{ route('board.create')}}" class="bg-gray-100 hover:bg-gray-400 text-gray-800 py-1 pl-2 pr-3 border-2 border-r-2 rounded-full inline-flex items-center">
+            <div class="px-auto">
+                <a href="{{ route('board.create')}}" class="flex flex-row justify-center w-36 g-gray-100 items-center hover:bg-gray-400 text-gray-800 mx-auto py-1 pl-2 pr-3 border-2 border-r-2 rounded-full">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                     </svg>

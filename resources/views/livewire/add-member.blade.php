@@ -3,13 +3,15 @@
     <div class="flex flex-row justify-between mt-2">
         <x-jet-label for="members" class="flex-none ml-2 mx-4 pt-5 text-lg" value="{{ __('Members') }}" />
 
+        @if (isset($board))
         @php
         $link = auth()->user()->boards()->where(['board_id' => $board->id])->first();
         @endphp
+        @endif
 
 
         <!-- Add Members -->
-        @if (auth()->user()->role == "Admin")
+        @if (auth()->user()->role == "Admin" || !isset($board))
         <div class="flex flex-col pt-4 pb-1">
             <div class="relative">
                 <x-jet-dropdown align="bottom" style="bottom:100%;" width="60">
@@ -118,7 +120,7 @@
                 <td class="px-6 align-middle py-3 text-xs whitespace-nowrap font-semibold text-left">{{ $member[0] }}</td>
                 <td class="px-6 align-middle py-3 text-xs whitespace-nowrap font-semibold text-left">{{ $member[1] }}</td>
                 <td class="px-6 align-middle text-xs whitespace-nowrap font-semibold text-left w-12">
-                    @if (auth()->user()->role == "Admin")
+                    @if (auth()->user()->role == "Admin" || !isset($board))
                     @if($first)
                     {{ $member[2] }}
                     @else
@@ -147,7 +149,7 @@
                     @endif
                 </td>
                 <td class="flex flex-row justify-between py-3">
-                    @if (auth()->user()->role == "Admin")
+                    @if (auth()->user()->role == "Admin" || !isset($board))
                     @if(!$first)
                     <button type="button" wire:click="removeMember({{ json_encode($member) }})" class="cursor-pointer mr-1 my-auto" wire:loading.attr="disabled">
                         <svg xmlns="http://www.w3.org/2000/svg" class="ml-3 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
