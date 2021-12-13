@@ -48,8 +48,6 @@ class BoardsController extends Controller
         $title = $request->input('title');
         $members = json_decode($request->input('members'));
 
-        $test = array($title, $members);
-
         // create and save board to db
         $board = new Board;
         $board->title = $title;
@@ -130,6 +128,7 @@ class BoardsController extends Controller
      */
     public function update(Request $request, Board $board)
     {
+
         // check if user is a member of the board
         if (Auth::user()->role != "Admin") {
             $isMember = false;
@@ -143,6 +142,7 @@ class BoardsController extends Controller
                 return redirect()->route('board.index');
             }
         }
+
 
         $request->validate([
             'title' => [
