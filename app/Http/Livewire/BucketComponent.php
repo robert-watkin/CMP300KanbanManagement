@@ -16,9 +16,13 @@ class BucketComponent extends Component
 
     public function render()
     {
-        $this->bucketTitle = $this->bucket->title;
         $cards = $this->bucket->cards()->get();
         return view('livewire.bucket-component', ['bucket' => $this->bucket, 'cards' => $cards]);
+    }
+
+    public function mount()
+    {
+        $this->bucketTitle = $this->bucket->title;
     }
 
     public function deleteBucket()

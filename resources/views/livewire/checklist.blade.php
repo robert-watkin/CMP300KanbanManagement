@@ -2,7 +2,7 @@
     <x-jet-label for="Checklist" class="flex-none ml-2 mx-4 text-lg" value="{{ __('Checklist') }}" />
     <div class=" pl-0">
 
-        @if (auth()->user()->role != "Admin")
+        @if (auth()->user()->role != "Admin" && isset($card))
         @php
         $link = auth()->user()->boards()->where(['board_id' => $card->bucket->board->id])->first();
         @endphp
@@ -29,7 +29,7 @@
                     </svg>
                 </div>
                 @else
-                @if ($link->role != "Viewer")
+                @if (!isset($link) || $link->role != "Viewer")
                 <input wire:model="checklist.{{ $key }}.1" class="pr-4 mr-4 my-auto rounded-md" type="checkbox" />
 
                 <div type="button" wire:click="removeItem({{ $key }})" class="cursor-pointer my-auto ">
@@ -60,7 +60,7 @@
             </a>
         </div>
         @else
-        @if ($link->role != "Viewer")
+        @if (!isset($link) || $link->role != "Viewer")
         <div class="mt-2">
             <a wire:click="addItem" wire:loading.attr="disabled" class="bg-gray-100 cursor-pointer hover:bg-gray-400 text-gray-800 py-1 pl-1 pr-2 border-2 border-r-2 rounded-full inline-flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">

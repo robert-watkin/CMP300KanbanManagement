@@ -13,11 +13,11 @@ class BucketPanel extends Component
 
     public $board;
 
-
     public function render(): View
     {
         return view('livewire.bucket-panel', ["board" => $this->board]);
     }
+
 
     public function newBucket()
     {

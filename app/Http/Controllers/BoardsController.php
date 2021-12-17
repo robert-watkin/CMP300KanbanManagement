@@ -114,7 +114,7 @@ class BoardsController extends Controller
         }
 
 
-        $board = Board::find($board)->first();
+        $board = Board::find($board->id);
 
         return view('board.edit')->with(compact('board'));
     }
