@@ -7,6 +7,7 @@ use App\Http\Livewire\BucketComponent;
 use App\Models\User;
 use App\Models\Board;
 use App\Models\Bucket;
+use App\Models\Card;
 use App\Http\Livewire\BucketPanel;
 use App\Models\BoardMember;
 use App\Providers\RouteServiceProvider;
@@ -16,7 +17,8 @@ use Laravel\Jetstream\Jetstream;
 use Livewire\Livewire;
 use Tests\TestCase;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Date;
+use Symfony\Component\HttpFoundation\ParameterBag;
 
 class CardTest extends TestCase
 {
@@ -28,82 +30,111 @@ class CardTest extends TestCase
         $this->actingAs($user = User::factory()->create());
 
         $bucket = Bucket::factory()->create();
+        $board = Board::find($bucket->board_id);
 
-        $request = Request::create('/card/create', 'GET', ['bucketid' => $bucket->id]);
+        $link = new BoardMember();
+        $link->board_id = $board->id;
+        $link->user_id = $user->id;
+        $link->status = "Accepted";
+        $link->role = "Editor";
+        $link->save();
 
-        $request = $this->call('GET', '/card/create', ['bucketid' => $bucket->id]);
+        $response = $this->json('GET', '/card/create', ['bucketid' => $bucket->id]);
 
-        $controller = new CardsController();
-        $response = $controller->create($request);
-
-        $response->assertStatus(200);
+        $this->assertEquals(200, $response->getStatusCode());
     }
 
     public function test_cards_can_be_created()
     {
-        /*
-        // create authed user
+
         $this->actingAs($user = User::factory()->create());
 
+        $bucket = Bucket::factory()->create();
+        $board = Board::find($bucket->board_id);
+
+        $link = new BoardMember();
+        $link->board_id = $board->id;
+        $link->user_id = $user->id;
+        $link->status = "Accepted";
+        $link->role = "Editor";
+        $link->save();
+
         // create request
-        $request = Request::create('/board/store', 'POST', [
+        $request = Request::create('/card/store', 'POST', [
             'title' => 'foo',
-            'members' => '{}'
+            'description' => 'this is a description',
+            'deadline' => date("Y/m/d"),
+            'bucketid' => $bucket->id,
+            'boardid' => $board->id
         ]);
 
         // run request
-        $controller = new BoardsController();
+        $controller = new CardsController();
         $response = $controller->store($request);
 
-        // checkr request status
+        // search model has been created
+        $card = Card::where('bucket_id', $bucket->id)->first();
+
+        // check card has been inserted
+        $this->assertEquals('foo', $card->title);
+        $this->assertEquals('this is a description', $card->description);
+
+        // check request status
         $this->assertEquals(302, $response->getStatusCode());
-        */
     }
 
     public function test_cards_can_be_edited()
     {
-        /*
+
         // create admin
         $user = User::factory()->create();
         $user->role = 'Admin';
         $this->actingAs($user);
 
         // create board
-        $board = Board::factory()->create();
+        $card = Card::factory()->create();
+        $board = $card->bucket->board;
 
         // setup update request
-        $request = Request::create('/board/{board}', 'PUT', [
+        $request = Request::create('/card/{card}', 'PUT', [
             'title' => 'New Title',
-            'members' => '{}'
+            'description' => 'New Description',
+            'deadline' => date('Y-m-d'),
+            'boardid' => $board->id
         ]);
 
         // run request
-        $controller = new BoardsController();
-        $response = $controller->update($request, $board);
+        $controller = new CardsController();
+        $response = $controller->update($request, $card);
 
         // check updated value is present
-        $this->assertEquals('New Title', $board->fresh()->title);
-        */
+        $this->assertEquals('New Title', $card->fresh()->title);
+        $this->assertEquals('New Description', $card->fresh()->description);
+        $this->assertEquals(302, $response->getStatusCode());
     }
 
     public function test_cards_can_be_deleted()
     {
-        /*
+
         // create admin
         $user = User::factory()->create();
         $user->role = 'Admin';
         $this->actingAs($user);
 
         // create board
-        $board = Board::factory()->create();
+        $card = Card::factory()->create();
+        $id = $card->id;
 
 
         // run request
-        $controller = new BoardsController();
-        $response = $controller->destroy($board);
+        $controller = new CardsController();
+        $response = $controller->destroy($card);
 
-        // check updated value is present
+        // attempt to find the card
+        $card = Card::find($id);
+
+        // asserts
+        $this->assertEquals(null, $card);
         $this->assertEquals(302, $response->getStatusCode());
-        */
     }
 }
