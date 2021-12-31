@@ -106,17 +106,17 @@
     <div class="hidden sm:flex sm:items-center sm:ml-6">
         <!-- admin links -->
         <div>
-            @if ($user->role == "admin")
+            @if ($user->role == "Admin")
             <h1 class="">Admin</h1>
             <ul class="mb-4">
                 <li class="mb-4 mt-1">
-                    <a href="{{ route('board.index') }}" class="flex flex-row items-center h-2 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                    <a href="/admin/users" class="flex flex-row items-center h-2 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
                         <span class="inline-flex items-center justify-center h-4 text-lg text-gray-400"><i class="bx bx-home"></i></span>
                         <span class="text-sm font-medium">User Management</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('board.index') }}" class="flex flex-row items-center h-2 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+                    <a href="/admin/boards" class="flex flex-row items-center h-2 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
                         <span class="inline-flex items-center justify-center h-4 text-lg text-gray-400"><i class="bx bx-home"></i></span>
                         <span class="text-sm font-medium">Board Management</span>
                     </a>
