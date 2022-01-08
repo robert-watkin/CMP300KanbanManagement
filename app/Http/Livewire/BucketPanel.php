@@ -5,11 +5,12 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Bucket;
 use App\Models\Card;
+use App\Models\Board;
 use Illuminate\Contracts\View\View;
 
 class BucketPanel extends Component
 {
-    protected $listeners = ['bucketDeleted' => '$refresh', 'movingCard'];
+    protected $listeners = ['hideButton' => '$refresh', 'bucketDeleted' => '$refresh', 'movingCard'];
 
     public $board;
 
@@ -30,11 +31,13 @@ class BucketPanel extends Component
         $bucket->board_id = $this->board->id;
         $bucket->title = "New Bucket";
         $bucket->save();
+
+        // refresh board model for count checks
+        $this->board = Board::find($this->board->id);
     }
 
     public function movingCard($values)
     {
-
         $card_id = $values[0];
         $bucket_id = $values[1];
 

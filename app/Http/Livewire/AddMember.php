@@ -126,7 +126,8 @@ class AddMember extends Component
         array_push($member, $user->id);
 
         // add member to members array
-        array_push($this->members, $member);
+
+        dd($this->members);
 
         $this->render();
     }
@@ -142,10 +143,13 @@ class AddMember extends Component
     public function roleChange()
     {
         $keys = array_keys($this->roles);
-        $counter = 0;
-        foreach ($this->roles as $role) {
-            $this->members[$counter][2] = $role;
-            $counter++;
+
+        foreach ($this->members as $mkey => $member) {
+            foreach ($keys as $key) {
+                if ($member[4] == $key) {
+                    $this->members[$mkey][2] = $this->roles[$key];
+                }
+            }
         }
     }
 }
