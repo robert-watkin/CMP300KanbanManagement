@@ -126,8 +126,7 @@ class AddMember extends Component
         array_push($member, $user->id);
 
         // add member to members array
-
-        dd($this->members);
+        array_push($this->members, $member);
 
         $this->render();
     }

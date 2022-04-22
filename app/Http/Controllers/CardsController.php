@@ -134,7 +134,7 @@ class CardsController extends Controller
         }
 
 
-        $card = Card::find($card)->first();
+        $card = Card::find($card->id);
 
         if (!request()->has('bucketid')) {
             return redirect()->route("board.index");

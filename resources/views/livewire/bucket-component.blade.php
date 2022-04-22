@@ -16,7 +16,7 @@
 
 
     @foreach($cards as $card)
-    <div class="py-2 cardDraggable" draggable="true" id="{{$card->id}}" ondragstart="drag(event, '{{ $card->id }}')">
+    <div class="py-2 cardDraggable" draggable="true" id="{{$card->id*time()}}" ondragstart="drag(event, '{{ $card->id }}')">
         <livewire:card-component :bucket="$bucket" :card="$card" :key="$card->id" />
     </div>
     @endforeach

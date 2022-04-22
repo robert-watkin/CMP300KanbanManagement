@@ -50,7 +50,6 @@
     }
 
     function drop(ev, bucket_id) {
-
         ev.preventDefault();
         var data = ev.dataTransfer.getData("text");
         var card = document.getElementById(data);
@@ -90,6 +89,7 @@
         var data = ev.dataTransfer.getData("text");
         var card = document.getElementById(data);
         card.style.display = "none";
+
 
         var els = document.querySelectorAll('.cardDraggable');
         for (var i = 0; i < els.length; i++) {
