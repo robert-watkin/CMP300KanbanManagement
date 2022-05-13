@@ -74,21 +74,22 @@ class BoardsController extends Controller
      */
     public function show(Board $board)
     {
-        // check if user is a member of the board
+        // perform checks if user is not an admin
         if (Auth::user()->role != "Admin") {
+            // Search through board members to see if current user is a member of the board
             $isMember = false;
             foreach ($board->users as $link) {
                 if ($link->user_id == Auth::user()->id) {
                     $isMember = true;
                 }
-            }
+            }   
 
+            // if the user is not a member, redirect them to the board index
             if ($isMember === false) {
                 return redirect()->route('board.index');
             }
         }
-
-        return view('board.show')->with(compact('board'));
+        return view('board.show')->with(compact('board')); // return view with the board
     }
 
     /**

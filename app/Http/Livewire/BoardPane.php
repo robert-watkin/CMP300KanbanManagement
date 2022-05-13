@@ -23,7 +23,7 @@ class BoardPane extends Component
     {
         $this->title = $this->board->title;
 
-
+        // get count of cards
         $c = 0;
         foreach ($this->board->buckets as $bucket) {
             $c = $c + count($bucket->cards);
@@ -34,6 +34,7 @@ class BoardPane extends Component
 
     public function edit()
     {
+        // set the inline editor to true - front end handles showing inputs
         $this->editable = true;
     }
 

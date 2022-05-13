@@ -172,7 +172,7 @@ class CardsController extends Controller
             }
         }
 
-        //
+        // validation
         $request->validate([
             'title' => [
                 'required'
@@ -186,7 +186,6 @@ class CardsController extends Controller
         ]);
 
         // update record
-
         $card->title = $request['title'];
         $card->description = $request['description'];
         $card->deadline = date('Y-m-d', strtotime($request['deadline']));
